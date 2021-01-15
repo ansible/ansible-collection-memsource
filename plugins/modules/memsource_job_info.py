@@ -26,10 +26,7 @@ options:
     description:
       - A dict of filters to apply.
       - Each dict item consists of a filter key and a filter value.
-      - See U(https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) for possible filters.
-      - Filter names and values are case sensitive.
-      - You can use underscores instead of dashes (-) in the filter keys.
-      - Filter keys with underscores will take precedence in case of conflict.
+      - See U(https://cloud.memsource.com/web/docs/api#operation/getPart) for possible filters.
     required: false
     default: {}
     type: dict
@@ -47,6 +44,12 @@ EXAMPLES = """
 - name: Gather information about a specific job
   community.memsource.memsource_job:
     project: Project101
+    filters:
+      targetLang: ja_jp
+
+- name: Gather information about a specific job
+  community.memsource.memsource_job:
+    project_id: 123456
     filters:
       targetLang: ja_jp
 """
