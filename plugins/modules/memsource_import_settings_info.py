@@ -52,8 +52,6 @@ import_settings:
     type: list
 """
 
-from memsource import Memsource
-
 from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.memsource.plugins.module_utils.memsource import (
     get_default_argspec,
