@@ -18,10 +18,7 @@ options:
     description:
       - A dict of filters to apply.
       - Each dict item consists of a filter key and a filter value.
-      - See U(https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) for possible filters.
-      - Filter names and values are case sensitive.
-      - You can use underscores instead of dashes (-) in the filter keys.
-      - Filter keys with underscores will take precedence in case of conflict.
+      - See U(https://cloud.memsource.com/web/docs/api#operation/getProject) for possible filters.
     required: false
     default: {}
     type: dict
@@ -32,8 +29,6 @@ requirements: [python-memsource]
 """
 
 EXAMPLES = """
-# Note: These examples do not set authentication details, see the AWS Guide for details.
-
 - name: Gather information about all available projects
   community.memsource.memsource_project_info:
 
