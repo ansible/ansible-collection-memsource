@@ -74,27 +74,16 @@ def main():
     argument_spec = get_default_argspec()
     argument_spec = dict(
         filters=dict(default={}, type="dict"),
-        project=dict(type="str"),
-        project_id=dict(type="int"),
+        project_uid=dict(type="str", required=True),
     )
 
-    module = AnsibleModule(
-        argument_spec=argument_spec,
-        supports_check_mode=True,
-        required_one_of=[["project", "project_id"]],
-        mutually_exclusive=[["project", "project_id"]],
-    )
+    module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)
 
     _memsource = get_memsource_client(module.params)
 
-    if module.params.get("project"):
-        project_id = _memsource.get_projects(
-            filters={"name": module.params["project"]}
-        )[0]["id"]
-    else:
-        project_id = module.params.get("project_id")
-
-    jobs = _memsource.get_jobs(project_id, filters=module.params.get("filters"))
+    jobs = _memsource.get_jobs(
+        module.params.get("project_uid"), filters=module.params.get("filters")
+    )
 
     module.exit_json(jobs=jobs)
 

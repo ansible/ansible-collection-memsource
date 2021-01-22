@@ -64,12 +64,12 @@ EXAMPLES = """
 - name: Retrieve job information
   community.memsource.memsource_job:
     uid: uid
-    project_id: project_id
+    project_uid: project_uid
 
 - name: Delete job
   community.memsource.memsource_job:
     uid: uid
-    project_id: project_id
+    projectu_id: project_uid
     state: absent
 """
 
@@ -94,11 +94,12 @@ def main():
     argument_spec.update(
         dict(
             uid=dict(type="str"),
-            project_id=dict(type="int"),
+            project_uid=dict(type="str"),
             langs=dict(type="list"),
             filename=dict(type="path"),
             use_project_file_import_settings=dict(type="bool"),
             purge_on_delete=dict(type="bool"),
+            split_filename_on_dir=dict(type="bool"),
             state=dict(type="str", default="present", choices=["absent", "present"]),
         ),
     )
@@ -117,22 +118,23 @@ def main():
             )
         }
         job = _memsource.create_job(
-            module.params.get("project_id"),
+            module.params.get("project_uid"),
             module.params.get("langs"),
             module.params.get("filename"),
+            module.params.get("split_filename_on_dir", False),
             **kwargs
         )
         _result.update({"changed": True})
     elif _action == "read":
         job = _memsource.get_job_by_id(
-            module.params["uid"], module.params["project_id"]
+            module.params["uid"], module.params["project_uid"]
         )
     elif _action == "update":
         pass
     else:
         res = _memsource.delete_job(
             module.params["uid"],
-            module.params["project_id"],
+            module.params["project_uid"],
             purge=module.params.get("purge_on_delete", False),
             do_not_fail_on_404=True,
         )
