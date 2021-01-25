@@ -14,40 +14,26 @@ description:
     - Manage a Memsource job
 author: 'Yanis Guenane (@Spredzy)'
 options:
-  name:
+  uid:
     description:
-      - A dict of filters to apply.
-    required: false
-    default: {}
-    type: dict
-  template:
+      - UID of the job
+    type: str
+  project_uid:
     description:
-      - A dict of filters to apply.
-    required: false
-    default: {}
-    type: dict
-  template_id:
-    description:
-      - A dict of filters to apply.
-    required: false
-    default: {}
-    type: dict
+      - UID of the project the job's belong to
+    type: str
   source_lang:
     description:
-      - A dict of filters to apply.
-    required: false
-    default: {}
-    type: dict
+      - Source language of the job
+    type: str
   target_langs:
     description:
-      - A dict of filters to apply.
-    required: false
-    default: {}
-    type: dict
+      - Target languages for the job
+    type: list
 extends_documentation_fragment:
 - community.memsource.memsource
 
-requirements: [python-memsource]
+requirements: [memsource]
 """
 
 EXAMPLES = """
@@ -60,6 +46,7 @@ EXAMPLES = """
     target_langs:
       - ja_jp
       - zh_cn
+    filename: /path/to/file
 
 - name: Retrieve job information
   community.memsource.memsource_job:

@@ -10,15 +10,14 @@ This collection aims to offer an Ansible native experience in order to interact 
 
 Name | Description
 --- | ---
-[memsource_import_settings](https://github.com/Spredzy/ansible-collection-memsource) |
-[memsource_import_settings_info](https://github.com/Spredzy/ansible-collection-memsource) |
-[memsource_job](https://github.com/Spredzy/ansible-collection-memsource) |
-[memsource_job_info](https://github.com/Spredzy/ansible-collection-memsource) |
-[memsource_job_targetfile](https://github.com/Spredzy/ansible-collection-memsource) |
-[memsource_project](https://github.com/Spredzy/ansible-collection-memsource) |
-[memsource_project_info](https://github.com/Spredzy/ansible-collection-memsource) |
-[memsource_project_template](https://github.com/Spredzy/ansible-collection-memsource) |
-[memsource_project_template_info](https://github.com/Spredzy/ansible-collection-memsource) |
+[memsource_import_settings](https://github.com/Spredzy/ansible-collection-memsource) | Manage a Memsource import settings configuration
+[memsource_import_settings_info](https://github.com/Spredzy/ansible-collection-memsource) | List all available Memsource import settings configurations
+[memsource_job](https://github.com/Spredzy/ansible-collection-memsource) | Manage a Memsource job
+[memsource_job_info](https://github.com/Spredzy/ansible-collection-memsource) | List all Memsource job
+[memsource_job_targetfile](https://github.com/Spredzy/ansible-collection-memsource) | Download a Memsource job target file
+[memsource_project](https://github.com/Spredzy/ansible-collection-memsource) | Manage a Memsource project
+[memsource_project_info](https://github.com/Spredzy/ansible-collection-memsource) | List all Memsource projects available
+[memsource_project_template_info](https://github.com/Spredzy/ansible-collection-memsource) | List all Memsource project templates available
 
 ## Installing this collection
 
@@ -62,6 +61,13 @@ You can either call modules by their Fully Qualified Collection Namespace (FQCN)
         name: Foo
     register: projects
 ```
+
+### Authentication
+
+There are two supported ways for a user to authenticate with the Memsource API:
+
+* Using the environment variables `$MEMSOURCE_USERNAME` and `$MEMSOURCE_PASSWORD`
+* Using the per task level configuration modules `memsource_username` and `memsource_password`
 
 ## Contributing to this collection
 
