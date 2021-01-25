@@ -62,7 +62,7 @@ def get_default_argspec():
     """
 
     return dict(
-        memsource_user=dict(type="str"),
+        memsource_username=dict(type="str"),
         memsource_password=dict(type="str", no_log=True),
         memsource_token=dict(type="str", no_log=True),
     )

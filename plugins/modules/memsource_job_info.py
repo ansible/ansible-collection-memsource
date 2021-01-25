@@ -14,13 +14,9 @@ description:
     - Gather information about jobs for a specific project in Memsource
 author: 'Yanis Guenane (@Spredzy)'
 options:
-  project:
+  project_uid:
     description:
-      - Name of the project to retrieved jobs for.
-      - This option is mutually exclusive with C(project_id).
-  project_id:
-    description:
-      - ID of the project to retrieved jobs for
+      - UID of the project to retrieved jobs for
       - This option is mutually exclusive with C(project).
   filters:
     description:
@@ -33,23 +29,13 @@ options:
 extends_documentation_fragment:
 - community.memsource.memsource
 
-requirements: [python-memsource]
+requirements: [memsource]
 """
 
 EXAMPLES = """
-- name: Gather information about all available templates
-  community.memsource.memsource_job_info:
-    project: Project101
-
 - name: Gather information about a specific job
   community.memsource.memsource_job:
-    project: Project101
-    filters:
-      targetLang: ja_jp
-
-- name: Gather information about a specific job
-  community.memsource.memsource_job:
-    project_id: 123456
+    project_uid: 123456
     filters:
       targetLang: ja_jp
 """

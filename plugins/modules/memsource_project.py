@@ -14,34 +14,30 @@ description:
     - Manage a Memsource project
 author: 'Yanis Guenane (@Spredzy)'
 options:
+  uid:
+    description:
+      - UID of the project
+    type: str
   name:
     description:
-      - A dict of filters to apply.
+      - A dict of filters to apply
     required: false
     default: {}
     type: dict
   template_id:
     description:
-      - A dict of filters to apply.
+      - A dict of filters to apply
     required: false
     default: {}
     type: dict
-  source_lang:
+  purge_on_delete:
     description:
-      - A dict of filters to apply.
-    required: false
-    default: {}
-    type: dict
-  target_langs:
-    description:
-      - A dict of filters to apply.
-    required: false
-    default: {}
-    type: dict
+      - Whether to purge the content of the project on delete
+    type: bool
 extends_documentation_fragment:
 - community.memsource.memsource
 
-requirements: [python-memsource]
+requirements: [memsource]
 """
 
 EXAMPLES = """

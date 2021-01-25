@@ -25,7 +25,7 @@ options:
 extends_documentation_fragment:
 - community.memsource.memsource
 
-requirements: [python-memsource]
+requirements: [memsource]
 """
 
 EXAMPLES = """

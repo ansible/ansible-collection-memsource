@@ -31,10 +31,15 @@ options:
         the Memsource API
     required: false
     type: path
+  force:
+    description:
+      - Whether to force write the downloaded file
+    required: false
+    type: bool
 extends_documentation_fragment:
 - community.memsource.memsource
 
-requirements: [python-memsource]
+requirements: [memsource]
 """
 
 EXAMPLES = """
@@ -54,7 +59,7 @@ RETURN = """
 job_file:
     returned: on success
     description: >
-        Actual content of the file
+        TBD
     type: dict
 """
 
