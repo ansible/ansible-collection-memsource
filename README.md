@@ -1,6 +1,6 @@
 # Ansible Collection - community.memsource
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GitHub Linter](https://github.com/Spredzy/ansible-collection-memsource/workflows/Linter/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GitHub Linter](https://github.com/ansible/ansible-collection-memsource/workflows/Linter/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 This collection aims to offer an Ansible native experience in order to interact and automate workflows with [Memsouce](https://www.memsource.com/). - "Helping global companies translate efficiently"
 
@@ -10,14 +10,14 @@ This collection aims to offer an Ansible native experience in order to interact 
 
 Name | Description
 --- | ---
-[memsource_import_settings](https://github.com/Spredzy/ansible-collection-memsource) | Manage a Memsource import settings configuration
-[memsource_import_settings_info](https://github.com/Spredzy/ansible-collection-memsource) | List all available Memsource import settings configurations
-[memsource_job](https://github.com/Spredzy/ansible-collection-memsource) | Manage a Memsource job
-[memsource_job_info](https://github.com/Spredzy/ansible-collection-memsource) | List all Memsource job
-[memsource_job_targetfile](https://github.com/Spredzy/ansible-collection-memsource) | Download a Memsource job target file
-[memsource_project](https://github.com/Spredzy/ansible-collection-memsource) | Manage a Memsource project
-[memsource_project_info](https://github.com/Spredzy/ansible-collection-memsource) | List all Memsource projects available
-[memsource_project_template_info](https://github.com/Spredzy/ansible-collection-memsource) | List all Memsource project templates available
+[memsource_import_settings](./plugins/memsource_import_settings.py) | Manage a Memsource import settings configuration
+[memsource_import_settings_info](./plugins/memsource_import_settings_info.py) | List all available Memsource import settings configurations
+[memsource_job](./plugins/memsource_job.py) | Manage a Memsource job
+[memsource_job_info](./plugins/memsource_job_info.py) | List all Memsource job
+[memsource_job_targetfile](./plugins/memsource_job_targetfile.py) | Download a Memsource job target file
+[memsource_project](./plugins/memsource_project.py) | Manage a Memsource project
+[memsource_project_info](./plugins/memsource_project_info.py) | List all Memsource projects available
+[memsource_project_template_info](./plugins/memsource/project_template_info.py) | List all Memsource project templates available
 
 ## Installing this collection
 
@@ -71,6 +71,6 @@ There are two supported ways for a user to authenticate with the Memsource API:
 
 ## Contributing to this collection
 
-We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against the [Memsource collection repository](https://github.com/Spredzy/ansible-collection-memsource).
+We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against the [Memsource collection repository](https://github.com/ansible/ansible-collection-memsource).
 
 See [Contributing to Ansible-maintained collections](https://docs.ansible.com/ansible/devel/community/contributing_maintained_collections.html#contributing-maintained-collections) for more details.
