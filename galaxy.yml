@@ -20,7 +20,7 @@ tags:
 
 dependencies: {}
 
-repository: https://github.com/Spredzy/ansible.memsource
-documentation: https://github.com/Spredzy/ansible.memsource
-homepage: https://github.com/Spredzy/ansible.memsource
-issues: https://github.com/Spredzy/ansible.memsource/issues
+repository: https://github.com/ansible/ansible.memsource
+documentation: https://github.com/ansible/ansible.memsource
+homepage: https://github.com/ansible/ansible.memsource
+issues: https://github.com/ansible/ansible.memsource/issues
