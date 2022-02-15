@@ -21,10 +21,16 @@ Name | Description
 
 ## Installing this collection
 
-You can install the AWS collection with the Ansible Galaxy CLI:
+You can install the memsource collection with the Ansible Galaxy CLI:
 
 ```sh
 #> ansible-galaxy collection install community.memsource
+```
+
+To install directly from GitHub:
+
+```sh
+#> ansible-galaxy collection install git@github.com:ansible/ansible-collection-memsource.git
 ```
 
 You can also include it in a `requirements.yml` file and install it with `ansible-galaxy collection install -r requirements.yml`, using the format:
