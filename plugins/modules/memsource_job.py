@@ -26,7 +26,7 @@ options:
     description:
       - Source language of the job
     type: str
-  target_langs:
+  langs:
     description:
       - Target languages for the job
     type: list
@@ -44,9 +44,8 @@ EXAMPLES = """
 #
 - name: Create job
   community.memsource.memsource_job:
-    name: My Project
-    source_lang: en_us
-    target_langs:
+    project_uid: project_uid
+    langs:
       - ja_jp
       - zh_cn
     filename: /path/to/file
@@ -59,7 +58,7 @@ EXAMPLES = """
 - name: Delete job
   community.memsource.memsource_job:
     uid: uid
-    projectu_id: project_uid
+    project_uid: project_uid
     state: absent
 """
 
