@@ -101,7 +101,7 @@ def main():
     if _action == "create":
         kwargs = {
             "useProjectFileImportSettings": module.params.get(
-                "use_project_file_import_settings", False
+                "use_project_file_import_settings", True
             )
         }
         job = _memsource.create_job(
