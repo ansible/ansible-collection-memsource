@@ -44,19 +44,19 @@ requirements: [memsource]
 
 EXAMPLES = """
 - name: Download job target file and rely on filename and original directory name for dest
-  community.memsource.memsource_job_file:
+  community.memsource.memsource_job_targetfile:
     project_uid: xxx
     jobs_uid: yyy
 
 - name: Download job target file and write it in path
-  community.memsource.memsource_job_file:
+  community.memsource.memsource_job_targetfile:
     project_uid: xxx
     jobs_uid: yyy
     path: /tmp/foo
 """
 
 RETURN = """
-job_file:
+job_targetfile:
     returned: on success
     description: >
         TBD
