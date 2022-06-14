@@ -30,6 +30,9 @@ options:
     description:
       - Target languages for the job
     type: list
+  preTranslate:
+    description:
+      - Adds a flag to pre-populate data with cached strings
 extends_documentation_fragment:
 - community.memsource.memsource
 
@@ -87,6 +90,7 @@ def main():
             use_project_file_import_settings=dict(type="bool"),
             purge_on_delete=dict(type="bool"),
             split_filename_on_dir=dict(type="bool"),
+            preTranslate=dict(type="bool"),
             state=dict(type="str", default="present", choices=["absent", "present"]),
         ),
     )
@@ -109,6 +113,7 @@ def main():
             module.params.get("langs"),
             module.params.get("filename"),
             module.params.get("split_filename_on_dir", False),
+            module.params.get("preTranslate", True),
             **kwargs
         )
         _result.update({"changed": True})
