@@ -105,7 +105,7 @@ def main():
     if os.path.exists(_dest) and not module.params.get("force", False):
         pass
     else:
-        content = "%s\n" % str(res.content.decode("utf-8")).split("\n\r\n")[1]
+        content = "%s\n" % str(res.content.decode("utf-8")).split("\n\r\n")[0]
         with open(_dest, "w+") as ftw:
             ftw.write(content)
         _result.update({"changed": True})
