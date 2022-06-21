@@ -1,0 +1,24 @@
+---
+
+- name: Gather information about a specific job
+  community.memsource.memsource_job_info:
+    project_uid: "{{ project_uid }}"
+  register: _jobs
+
+- set_fact:
+    jobs: "{{ _jobs.jobs }}"
+
+- name: Create directory structure
+  file:
+    state: directory
+    path: "{{ role_path }}/files/_translations/{{ component }}/{{ item.targetLang }}/"
+  with_items: "{{ jobs }}"
+
+- name: Retrieve job information (download files)
+  community.memsource.memsource_job_targetfile:
+    job_uid: "{{ item.uid }}"
+    project_uid: "{{ project_uid }}"
+    path: "{{ role_path }}/files/_translations/{{ component }}/{{ item.targetLang }}/{{ item.filename | basename }}"
+    force: true
+  with_items: "{{ jobs }}"
+  register: job_content

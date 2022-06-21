@@ -1,0 +1,22 @@
+---
+# tasks file for pre_translation
+
+- name: Assertions
+  assert:
+    that:
+      - upstream_repo_url | default('') | length
+      - repo_branch | default('') | length
+      - project_name | default('') | length
+
+- name: Get current working directory
+  set_fact:
+    current_directory: "{{ lookup('env', 'PWD') }}"
+
+- name: Start with extracting strings from project
+  include_tasks: extract_strings_from_upstream.yml
+
+- name: Upload to Memsource 
+  include_tasks: upload_strings_to_memsource.yml
+
+- name: Cleanup 
+  include_tasks: "{{ current_directory }}/roles/shared_files/cleanup.yml"

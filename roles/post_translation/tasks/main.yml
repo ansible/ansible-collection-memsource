@@ -1,0 +1,28 @@
+---
+# tasks file for post_translation
+
+- name: Assertions
+  assert:
+    that:
+      - upstream_repo_url | default('') | length
+      - downstream_repo_url | default('') | length
+      - repo_branch | default('') | length
+
+- name: Get current working directory
+  set_fact:
+    current_directory: "{{ lookup('env', 'PWD') }}"
+
+- name: Extract Strings from memsource 
+  include_tasks: pull_translations_from_memsource.yml
+
+- name: Download strings from Memsource 
+  include_tasks: download_from_memsource.yml
+
+- name: Run post_translation shell script 
+  include_tasks: move_translated_strings.yml
+
+- name: Upload to (Upstream) Repository
+  include_tasks: push_strings_upstream.yml
+
+- name: Cleanup 
+  include_tasks: "{{ current_directory }}/roles/shared_files/cleanup.yml"

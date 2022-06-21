@@ -1,0 +1,49 @@
+---
+
+- name: Temporate Repository Storage Directory
+  ansible.builtin.file:
+    state: directory
+    name: "{{ role_path }}/files/_clones/"
+  register: clone_dir
+
+- name: Set component name variable
+  set_fact:
+    component: '{{ upstream_repo_url.split("/")[1].replace(".git", "") }}'
+
+- name: Set clone_repo path
+  ansible.builtin.file:
+    state: directory
+    name: "{{ role_path }}/files/_clones/{{ component }}"
+  register: clone_repo_path  
+
+- name: Cloned Repository Directory (From Upstream - latest changes)
+  git:
+    repo: 'git@github.com:{{ upstream_repo_url }}.git'
+    dest: '{{ clone_repo_path.path }}'
+    version: '{{ repo_branch }}'
+    force: true
+    depth: 1
+
+- name: Temporary Strings Storage Directory in repository
+  ansible.builtin.file:
+    state: directory
+    path: "{{ role_path }}/files/_clones/{{ component }}/translations"
+  register: translations_dir
+
+- name: Pre_translation shell script
+  block:
+  - name: Permissions for Script
+    ansible.builtin.file:
+      path: "{{ role_path }}/files/_clones/{{ component }}/pre_translation.sh"
+      mode: '0755'
+
+  - name: Run Script
+    ansible.builtin.shell: "cd {{ role_path }}/files/ && ./_clones/{{ component }}/pre_translation.sh"
+
+- name: List all files in translations_dir
+  command: "ls {{ translations_dir.path }}"
+  register: translations_loop
+
+- name: Translations Files in List 
+  set_fact: 
+    translation_files: "{{ translations_loop.stdout_lines }}"  

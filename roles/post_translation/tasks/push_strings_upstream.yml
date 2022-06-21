@@ -1,0 +1,28 @@
+---
+
+- name: Verify that mandatory parameters are defined 
+  assert: 
+    that: 
+      - downstream_repo_url | default('') | length
+      - upstream_repo_url | default('') | length
+      - repo_branch | default('') | length
+      - github_username | default('') | length
+
+- name: Add files to pr_branch & push the files
+  shell: |
+    git add . && \
+    git commit -m "Pushing updated strings" && \
+    git push origin {{ pr_branch }}
+  register: create_branch
+  ignore_errors: true
+  args:
+    chdir: "{{ clone_directory.path }}"  
+
+- name: Create a pull request
+  shell: | 
+    gh pr create --head {{github_username}}:{{pr_branch}} --fill --base {{ repo_branch }} --repo {{ upstream_repo_url }}
+  environment:
+    GITHUB_USERNAME: '{{ github_username }}'
+    GITHUB_TOKEN: '{{ github_token }}'
+  args:
+    chdir: '{{ clone_directory.path }}'
