@@ -1,0 +1,6 @@
+---
+- name: Generic Localization - Pre-translation
+  hosts: localhost
+  
+  roles:
+    - pre_translation
