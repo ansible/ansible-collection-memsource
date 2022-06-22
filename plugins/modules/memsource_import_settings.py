@@ -140,7 +140,8 @@ def main():
         pass
     else:
         res = _memsource.delete_import_settings(
-            module.params["uid"], do_not_fail_on_404=True,
+            module.params["uid"],
+            do_not_fail_on_404=True,
         )
         if res.status_code == 204:
             _result.update({"changed": True})
