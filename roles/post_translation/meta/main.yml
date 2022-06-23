@@ -11,6 +11,3 @@ galaxy_info:
   galaxy_tags: 
     - post_translation
     - pull
-
-dependencies:
-  - role: pre_translation

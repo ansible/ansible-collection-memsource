@@ -2,7 +2,7 @@
 # Global declaration for github credentials
 email: "aditya.mulik@gmail.com"
 github_username: "adityamulik"
-github_token: "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"
+github_token: ""
 
 # Global declaration for target languages
 translation_supported_langs:
