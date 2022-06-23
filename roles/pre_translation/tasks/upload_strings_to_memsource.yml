@@ -1,12 +1,12 @@
 ---
 
-# - name: Assertions
-#   assert:
-#     that:
-#       - memsource_username | default('') | length
-#       - memsource_password | default('') | length
-#       - translation_files | default('') | length
-#       - translation_supported_langs | default('') | length
+- name: Assertions
+  assert:
+    that:
+      - memsource_username | default('') | length
+      - memsource_password | default('') | length
+      - translation_files | default('') | length
+      - translation_supported_langs | default('') | length
 
 - name: Project Creation block
   block:

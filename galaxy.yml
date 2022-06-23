@@ -6,6 +6,7 @@ readme: README.md
 
 authors:
   - Yanis Guenane <yguenane+opensource@gmail.com>
+  - Aditya Mulik <aditya.mulik@gmail.com>
 
 description: An Ansible collection to interact with Memsource
 

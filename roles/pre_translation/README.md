@@ -1,38 +1,66 @@
-Role Name
+Pre Translation Role
 =========
 
-A brief description of the role goes here.
+The pre_translation role is used to push extracted string from GitHub project to Memsource client for it to be translated to several other languages.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Applicable variables needs to be provided for the pre_translation script.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Below are mandatory variables required.
+- email
+- github_username
+- github_token
+- translation_supported_langs (Default - can be overridden)
+- upstream_repo_url
+- repo_branch
+- project_name
+- preTranslate (Optional: Certain translations will be pre_translated from cached memsource database, until stated false)
+- project_template (Required: Project template dedicated for the specfic project to be translated)
+- memsource_username (To be provided from command-line)
+- memsource_password (To be provided from command-line)
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No applicable dependencies.
 
-Example Playbook
+Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+The playbook push.yml is available under playbooks/ directory will be used to run the role:
 
-    - hosts: servers
+    ---
+    - name: Generic Localization - Pre-translation
+      hosts: localhost
+      vars_files:
+        - "vars/common.yml"
+        - "vars/push_vars.yml"
       roles:
-         - { role: username.rolename, x: 42 }
+        - role: community.memsource.pre_translation
+
+Execution Steps
+---------------
+
+Ansible Playbook (push.yml) will be used to run this role.
+
+1. Provide the required variables from command-line or from playbooks/vars/ directory (common.yml & push_vars.yml)
+2. Provide the memsource username and memsource password from command-line
+3. From the root path of the collection, run the below command
+
+```ansible-playbook playbooks/push.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD```
+
+4. Extracted strings will be uploaded to memsource cloud.
 
 License
 -------
 
-BSD
+Apache-2.0
 
 Author Information
 ------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+- Aditya Mulik (aditya.mulik@gmail.com)

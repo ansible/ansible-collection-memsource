@@ -1,6 +1,6 @@
 ---
 
-- name: Temporate Repository Storage Directory
+- name: Temporary Repository Storage Directory
   ansible.builtin.file:
     state: directory
     name: "{{ role_path }}/files/_clones/"
