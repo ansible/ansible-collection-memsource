@@ -20,7 +20,7 @@ tags:
   - translation
   - localization
 
-dependencies: {}
+dependencies: {'git@github.com:ansible/python-memsource.git', 'main'}
 
 repository: https://github.com/ansible/ansible.memsource
 documentation: https://github.com/ansible/ansible.memsource
