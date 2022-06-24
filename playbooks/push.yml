@@ -1,0 +1,8 @@
+---
+- name: Generic Localization - Pre-translation
+  hosts: localhost
+  vars_files:
+    - "vars/common.yml"
+    - "vars/push_vars.yml"
+  roles:
+    - role: community.memsource.pre_translation

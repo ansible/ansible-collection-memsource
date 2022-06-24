@@ -1,0 +1,17 @@
+---
+# Global declaration for github credentials
+email: "aditya.mulik@gmail.com"
+github_username: "adityamulik"
+github_token: ""
+
+# Global declaration for target languages
+translation_supported_langs:
+  - es
+  - fr
+  - nl
+  - zh_cn
+  - ja
+  - ko
+
+upstream_repo_url: "adityamulik/pinakes"
+repo_branch: "devel"

@@ -1,6 +1,6 @@
 ---
 
-- name: Temporate Repository Storage Directory
+- name: Temporary Repository Storage Directory
   ansible.builtin.file:
     state: directory
     name: "{{ role_path }}/files/_clones/"
@@ -34,11 +34,11 @@
   block:
   - name: Permissions for Script
     ansible.builtin.file:
-      path: "{{ role_path }}/files/_clones/{{ component }}/pre_translation.sh"
+      path: "{{ role_path }}/files/_clones/{{ component }}/tools/scripts/l18n/pre_translation.sh"
       mode: '0755'
 
   - name: Run Script
-    ansible.builtin.shell: "cd {{ role_path }}/files/ && ./_clones/{{ component }}/pre_translation.sh"
+    ansible.builtin.shell: "cd {{ role_path }}/files/ && ./_clones/{{ component }}/tools/scripts/l18n/pre_translation.sh"
 
 - name: List all files in translations_dir
   command: "ls {{ translations_dir.path }}"
