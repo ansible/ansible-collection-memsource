@@ -1,5 +1,5 @@
 ---
-namespace: community
+namespace: ansible
 name: memsource
 version: 0.0.1
 readme: README.md
@@ -13,14 +13,13 @@ description: An Ansible collection to interact with Memsource
 
 license:
   - Apache-2.0
-license_file: LICENSE
 
 tags:
   - memsource
   - translation
   - localization
 
-dependencies: {'git@github.com:ansible/python-memsource.git', 'main'}
+dependencies: {}
 
 repository: https://github.com/ansible/ansible-collection-memsource
 documentation: https://github.com/ansible/ansible-collection-memsource

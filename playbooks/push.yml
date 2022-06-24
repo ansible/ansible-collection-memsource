@@ -5,4 +5,4 @@
     - "vars/common.yml"
     - "vars/push_vars.yml"
   roles:
-    - role: community.memsource.pre_translation
+    - role: ansible.memsource.pre_translation
