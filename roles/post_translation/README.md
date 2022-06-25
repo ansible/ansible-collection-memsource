@@ -1,7 +1,7 @@
 Post Translation Role
 =========
 
-The post_translation role is used to pull translated strings from Memsource client for the respective translated languages and push the strings to a downstream repository. Later a pull request is created by the script to the upstream repository to be reviewed and merged.
+The post_translation role is used to pull translated strings from Memsource client for the specified languages, commit, and push those strings back to the code repository.
 
 Requirements
 ------------
@@ -47,8 +47,13 @@ Execution Steps
 
 Ansible Playbook (pull.yml) will be used to run this role.
 
-1. Provide the required variables from command-line or from playbooks/vars/ directory (common.yml & pull_vars.yml)
-2. Provide the memsource username and memsource password from command-line
+1. Provide the required variables from command-line as per below or can be added to roles/post_translation/default/main.yml
+    One way of providing vars using command-line can be as below example
+    ```ansible-playbook playbooks/pull.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD -e email=test@abc.com```
+    or
+    Another way of providing vars using command-line can be using a separate yml file (e.g. pull-vars.yml)
+    ```ansible-playbook playbooks/pull.yml -e @pull-vars.yml```
+2. Provide the memsource username and memsource password from command-line or using Ansible Vault (Ref: https://docs.ansible.com/ansible/latest/user_guide/vault.html)
 3. From the root path of the collection, run the below command
 
 ```ansible-playbook playbooks/pull.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD```

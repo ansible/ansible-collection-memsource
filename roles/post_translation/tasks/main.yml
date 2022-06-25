@@ -4,8 +4,7 @@
 - name: Assertions
   assert:
     that:
-      - upstream_repo_url | default('') | length
-      - downstream_repo_url | default('') | length
+      - repo_url | default('') | length
       - repo_branch | default('') | length
 
 - name: Get current working directory
@@ -21,8 +20,8 @@
 - name: Run post_translation shell script 
   include_tasks: move_translated_strings.yml
 
-- name: Upload to (Upstream) Repository
-  include_tasks: push_strings_upstream.yml
+- name: Upload to Repository
+  include_tasks: push_strings.yml
 
 - name: Cleanup 
   include_tasks: "{{ current_directory }}/roles/shared_files/cleanup.yml"

@@ -12,7 +12,7 @@
 
 - name: Clone the repository
   git:
-    repo: 'git@github.com:{{ downstream_repo_url }}.git'
+    repo: 'git@github.com:{{ repo_url }}.git'
     dest: '{{clone_directory.path}}'
     version: '{{ repo_branch }}'
     force: true

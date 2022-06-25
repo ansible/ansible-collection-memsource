@@ -8,7 +8,7 @@
 
 - name: Set component name variable
   set_fact:
-    component: '{{ upstream_repo_url.split("/")[1].replace(".git", "") }}'
+    component: '{{ repo_url.split("/")[1].replace(".git", "") }}'
 
 - name: Set clone_repo path
   ansible.builtin.file:
@@ -18,7 +18,7 @@
 
 - name: Cloned Repository Directory (From Upstream - latest changes)
   git:
-    repo: 'git@github.com:{{ upstream_repo_url }}.git'
+    repo: 'git@github.com:{{ repo_url }}.git'
     dest: '{{ clone_repo_path.path }}'
     version: '{{ repo_branch }}'
     force: true

@@ -48,7 +48,12 @@ Execution Steps
 
 Ansible Playbook (push.yml) will be used to run this role.
 
-1. Provide the required variables from command-line or from playbooks/vars/ directory (common.yml & push_vars.yml)
+1. Provide the required variables from command-line as per below or can be added to roles/pre_translation/default/main.yml
+    One way of providing vars using command-line can be as below example
+    ```ansible-playbook playbooks/push.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD -e project_name=abc```
+    or
+    Another way of providing vars using command-line can be using a separate yml file (e.g. push-vars.yml)
+    ```ansible-playbook playbooks/push.yml -e @push-vars.yml```
 2. Provide the memsource username and memsource password from command-line
 3. From the root path of the collection, run the below command
 

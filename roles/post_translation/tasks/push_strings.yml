@@ -3,8 +3,7 @@
 - name: Verify that mandatory parameters are defined 
   assert: 
     that: 
-      - downstream_repo_url | default('') | length
-      - upstream_repo_url | default('') | length
+      - repo_url | default('') | length
       - repo_branch | default('') | length
       - github_username | default('') | length
 
@@ -20,7 +19,7 @@
 
 - name: Create a pull request
   shell: | 
-    gh pr create --head {{github_username}}:{{pr_branch}} --fill --base {{ repo_branch }} --repo {{ upstream_repo_url }}
+    gh pr create --head {{github_username}}:{{pr_branch}} --fill --base {{ repo_branch }} --repo {{ repo_url }}
   environment:
     GITHUB_USERNAME: '{{ github_username }}'
     GITHUB_TOKEN: '{{ github_token }}'

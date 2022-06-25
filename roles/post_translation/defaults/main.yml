@@ -1,2 +1,6 @@
 ---
-# defaults file for post_translation
+# Github credentials
+email: "aditya.mulik@gmail.com"
+github_username: ""
+github_token: ""
+project_uid: 

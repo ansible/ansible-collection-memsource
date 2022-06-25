@@ -4,7 +4,7 @@
 - name: Assertions
   assert:
     that:
-      - upstream_repo_url | default('') | length
+      - repo_url | default('') | length
       - repo_branch | default('') | length
       - project_name | default('') | length
 
