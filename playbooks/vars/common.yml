@@ -8,7 +8,7 @@ translation_supported_langs:
   - ja
   - ko
 
-repo_url: "adityamulik/pinkaes-ui"
+repo_url: "adityamulik/pinakes-ui"
 repo_branch: "main"
 
 memsource_username: "{{ lookup('env', 'MEMSOURCE_USERNAME') }}"
