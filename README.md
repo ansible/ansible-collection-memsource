@@ -70,7 +70,7 @@ You can either call modules by their Fully Qualified Collection Namespace (FQCN)
 
 ## Using the Roles
 
-Alertnatively, you can also make use of roles for extracting strings from a project and pushing it to memsource as well as extracting translated strings from memsource and pushing it back to the upstream project.
+Alternatively, you can also make use of roles for extracting strings from a project and pushing it to memsource as well as extracting translated strings from memsource and pushing it back to the upstream project.
 
 - [Push Strings to Memsource](roles/pre_translation/README.md)
 - [Pull Strings from Memsource](roles/post_translation/README.md)

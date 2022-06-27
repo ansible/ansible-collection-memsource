@@ -1,9 +1,4 @@
 ---
-# Global declaration for github credentials
-email: "aditya.mulik@gmail.com"
-github_username: "adityamulik"
-github_token: ""
-
 # Global declaration for target languages
 translation_supported_langs:
   - es
@@ -13,5 +8,8 @@ translation_supported_langs:
   - ja
   - ko
 
-upstream_repo_url: "adityamulik/pinakes"
-repo_branch: "devel"
+repo_url: ""
+repo_branch: ""
+
+memsource_username: "{{ lookup('env', 'MEMSOURCE_USERNAME') }}"
+memsource_password: "{{ lookup('env', 'MEMSOURCE_PASSWORD') }}"
