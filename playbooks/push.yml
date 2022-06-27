@@ -5,3 +5,4 @@
     - "vars/common.yml"
   roles:
     - role: ansible.memsource.pre_translation
+    - role: ansible.memsource.shared_files
