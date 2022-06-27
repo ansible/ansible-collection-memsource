@@ -42,7 +42,5 @@
     path: "{{ role_path }}/files/_clones/{{ component }}/tools/scripts/l18n/post_translation.sh"
     mode: '0755'     
 
-- name: Run shell script
-  ansible.builtin.shell: ./post_translation.sh
-  args:
-    chdir: "{{ clone_directory.path }}/tools/scripts/l18n/" 
+- name: Run Script
+  ansible.builtin.shell: "cd {{ role_path }}/files/ && ./_clones/{{ component }}/tools/scripts/l18n/post_translation.sh"
