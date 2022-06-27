@@ -11,7 +11,7 @@
 - name: Project Creation block
   block:
   - name: Create Project from Template ID
-    community.memsource.memsource_project:
+    ansible.memsource.memsource_project:
       name: "{{ project_name }}"
       template_id: "{{ project_template }}"
     register: _project
@@ -50,7 +50,7 @@
     loop: "{{ translation_files }}"
 
   - name: Upload files to jobs on project
-    community.memsource.memsource_job:
+    ansible.memsource.memsource_job:
       project_uid: "{{ project_uid }}"
       langs: "{{ translation_supported_langs }}"
       filename: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"

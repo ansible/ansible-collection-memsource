@@ -1,7 +1,7 @@
 ---
 
 - name: Gather information about a specific job
-  community.memsource.memsource_job_info:
+  ansible.memsource.memsource_job_info:
     project_uid: "{{ project_uid }}"
   register: _jobs
 
@@ -15,7 +15,7 @@
   with_items: "{{ jobs }}"
 
 - name: Retrieve job information (download files)
-  community.memsource.memsource_job_targetfile:
+  ansible.memsource.memsource_job_targetfile:
     job_uid: "{{ item.uid }}"
     project_uid: "{{ project_uid }}"
     path: "{{ role_path }}/files/_translations/{{ component }}/{{ item.targetLang }}/{{ item.filename | basename }}"
