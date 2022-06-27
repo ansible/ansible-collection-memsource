@@ -53,7 +53,7 @@ Ansible Playbook (pull.yml) will be used to run this role.
     or
     Another way of providing vars using command-line can be using a separate yml file (e.g. pull-vars.yml)
     ```ansible-playbook playbooks/pull.yml -e @pull-vars.yml```
-2. Provide the memsource username and memsource password from command-line or using Ansible Vault (Ref: https://docs.ansible.com/ansible/latest/user_guide/vault.html)
+2. Provide the memsource username and memsource password from command-line or using Ansible Vault
 3. From the root path of the collection, run the below command
 
 ```ansible-playbook playbooks/pull.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD```
