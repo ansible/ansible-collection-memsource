@@ -23,17 +23,17 @@ options:
     default: {}
     type: dict
 extends_documentation_fragment:
-- community.memsource.memsource
+- ansible.memsource.memsource
 
 requirements: [memsource]
 """
 
 EXAMPLES = """
 - name: Gather information about all available templates
-  community.memsource.memsource_template_info:
+  ansible.memsource.memsource_template_info:
 
 - name: Gather information about a named template
-  community.memsource.memsource_template_info:
+  ansible.memsource.memsource_template_info:
     filters:
       name: my-memsource-template
 """
@@ -48,7 +48,7 @@ templates:
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible_collections.community.memsource.plugins.module_utils.memsource import (
+from ansible_collections.ansible.memsource.plugins.module_utils.memsource import (
     get_default_argspec,
     get_memsource_client,
 )
