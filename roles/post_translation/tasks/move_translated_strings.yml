@@ -37,10 +37,12 @@
     mv {{ role_path }}/files/_translations/{{ component }} {{ role_path }}/files/_clones/{{ component }}/translations
   register: move_translations      
 
-- name: Assign permissions to script
-  ansible.builtin.file:
-    path: "{{ role_path }}/files/_clones/{{ component }}/tools/scripts/l18n/post_translation.sh"
-    mode: '0755'     
+- name: Pre_translation shell script
+  block:
+  - name: Permissions for Script
+    ansible.builtin.file:
+      path: "{{ role_path }}/files/_clones/{{ component }}/tools/scripts/l18n/post_translation.sh"
+      mode: '0755'
 
-- name: Run Script
-  ansible.builtin.shell: "cd {{ role_path }}/files/ && ./_clones/{{ component }}/tools/scripts/l18n/post_translation.sh"
+  - name: Run Script
+    ansible.builtin.shell: "cd {{ role_path }}/files/ && ./_clones/{{ component }}/tools/scripts/l18n/post_translation.sh"
