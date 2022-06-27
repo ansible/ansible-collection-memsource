@@ -8,7 +8,7 @@ translation_supported_langs:
   - ja
   - ko
 
-repo_url: ""
+upstream_repo_url: ""
 repo_branch: ""
 
 memsource_username: "{{ lookup('env', 'MEMSOURCE_USERNAME') }}"
