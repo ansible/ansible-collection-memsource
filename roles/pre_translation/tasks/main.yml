@@ -18,5 +18,5 @@
 - name: Upload to Memsource 
   include_tasks: upload_strings_to_memsource.yml
 
-# - name: Cleanup 
-#   include_tasks: "cleanup.yml"
+- name: Cleanup 
+  include_tasks: "cleanup.yml"

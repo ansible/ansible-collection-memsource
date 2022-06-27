@@ -24,5 +24,5 @@
 - name: Upload to Repository
   include_tasks: push_strings.yml
 
-- name: Cleanup 
-  include_tasks: "cleanup.yml"
+# - name: Cleanup 
+#   include_tasks: "cleanup.yml"
