@@ -1,5 +1,19 @@
 ---
 
+- name: Get current working directory
+  set_fact:
+    current_directory: "{{ lookup('env', 'PWD') }}"
+
+- name: Temporate Repository Storage Directory
+  ansible.builtin.file:
+    state: directory
+    name: "{{ role_path }}/files/_translations/"
+  register: translations_dir
+
+- name: Set component name variable
+  set_fact:
+    component: '{{ upstream_repo_url.split("/")[1].replace(".git", "") }}'    
+
 - name: Gather information about a specific job
   ansible.memsource.memsource_job_info:
     project_uid: "{{ project_uid }}"
@@ -8,7 +22,7 @@
 - set_fact:
     jobs: "{{ _jobs.jobs }}"
 
-- name: Create directory structure
+- name: Create directory structure for all languages
   file:
     state: directory
     path: "{{ role_path }}/files/_translations/{{ component }}/{{ item.targetLang }}/"
