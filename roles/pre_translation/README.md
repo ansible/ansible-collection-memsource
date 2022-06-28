@@ -6,23 +6,23 @@ The pre_translation role is used to push extracted string from GitHub project to
 Requirements
 ------------
 
-Applicable variables needs to be provided for the pre_translation script.
+1. pre_translation.sh | The script should be available in the upstream GitHub Repository (e.g. path: /tools/scripts/l18n/pre_translation.sh)
 
 Role Variables
 --------------
 
 Below are mandatory variables required.
-- email
-- github_username
-- github_token
-- translation_supported_langs (Default - can be overridden)
-- upstream_repo_url
-- repo_branch
-- project_name
-- preTranslate (Optional: Certain translations will be pre_translated from cached memsource database, until stated false)
-- project_template (Required: Project template dedicated for the specfic project to be translated)
-- memsource_username (To be provided from command-line)
-- memsource_password (To be provided from command-line)
+- email - (Type: str)
+- github_username - (Type: str)
+- github_token - (Type: str)
+- translation_supported_langs (Default - can be overridden) - (Type: list)
+- upstream_repo_url - (Type: str)
+- repo_branch - (Type: str)
+- project_name - (Type: str)
+- preTranslate (Optional: Certain translations will be pre_translated from cached memsource database, until stated false) - (Type: bool)
+- project_template (Required: Project template dedicated for the specfic project to be translated) - (Type: int)
+- memsource_username (To be provided from command-line) - (Type: str)
+- memsource_password (To be provided from command-line) - (Type: str)
 
 Dependencies
 ------------
@@ -39,17 +39,21 @@ The playbook push.yml is available under playbooks/ directory will be used to ru
       hosts: localhost
       vars_files:
         - "vars/common.yml"
-        - "vars/push_vars.yml"
       roles:
-        - role: community.memsource.pre_translation
+        - role: ansible.memsource.pre_translation
 
 Execution Steps
 ---------------
 
 Ansible Playbook (push.yml) will be used to run this role.
 
-1. Provide the required variables from command-line or from playbooks/vars/ directory (common.yml & push_vars.yml)
-2. Provide the memsource username and memsource password from command-line
+1. Provide the required variables from command-line as per below or can be added to roles/pre_translation/default/main.yml
+    One way of providing vars using command-line can be as below example
+    ```ansible-playbook playbooks/push.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD -e project_name=abc```
+    or
+    Another way of providing vars using command-line can be using a separate yml file (e.g. push-vars.yml)
+    ```ansible-playbook playbooks/push.yml -e @extra_vars.yml```
+2. Provide the memsource username and memsource password from command-line or using Ansible Vault
 3. From the root path of the collection, run the below command
 
 ```ansible-playbook playbooks/push.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD```

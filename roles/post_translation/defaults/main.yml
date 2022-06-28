@@ -1,2 +1,7 @@
 ---
-# defaults file for post_translation
+# Github credentials
+email: ""
+github_username: ""
+github_token: ""
+project_uid: ""
+downstream_repo_url: ""

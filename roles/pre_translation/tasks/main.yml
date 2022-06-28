@@ -19,4 +19,4 @@
   include_tasks: upload_strings_to_memsource.yml
 
 - name: Cleanup 
-  include_tasks: "{{ current_directory }}/roles/shared_files/cleanup.yml"
+  include_tasks: "cleanup.yml"

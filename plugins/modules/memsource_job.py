@@ -34,7 +34,7 @@ options:
     description:
       - Adds a flag to pre-populate data with cached strings
 extends_documentation_fragment:
-- community.memsource.memsource
+- ansible.memsource.memsource
 
 requirements: [memsource]
 """
@@ -43,7 +43,7 @@ EXAMPLES = """
 # Project creation
 #
 - name: Create job
-  community.memsource.memsource_job:
+  ansible.memsource.memsource_job:
     project_uid: project_uid
     langs:
       - ja_jp
@@ -51,12 +51,12 @@ EXAMPLES = """
     filename: /path/to/file
 
 - name: Retrieve job information
-  community.memsource.memsource_job:
+  ansible.memsource.memsource_job:
     uid: uid
     project_uid: project_uid
 
 - name: Delete job
-  community.memsource.memsource_job:
+  ansible.memsource.memsource_job:
     uid: uid
     project_uid: project_uid
     state: absent
@@ -71,7 +71,7 @@ job:
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible_collections.community.memsource.plugins.module_utils.memsource import (
+from ansible_collections.ansible.memsource.plugins.module_utils.memsource import (
     get_action,
     get_default_argspec,
     get_memsource_client,

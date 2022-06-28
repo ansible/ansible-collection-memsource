@@ -1,2 +1,5 @@
 ---
 # defaults file for pre_translation
+preTranslate: true
+project_name: ""
+project_template: 

@@ -3,7 +3,6 @@
 - name: Verify that mandatory parameters are defined 
   assert: 
     that: 
-      - downstream_repo_url | default('') | length
       - upstream_repo_url | default('') | length
       - repo_branch | default('') | length
       - github_username | default('') | length
