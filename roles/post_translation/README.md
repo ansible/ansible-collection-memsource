@@ -49,7 +49,7 @@ Execution Steps
 Ansible Playbook (pull.yml) will be used to run this role.
 
 1. Provide the required variables from command-line as per below example
-    ```
+    ```bash
     ansible-playbook playbooks/pull.yml 
       -e memsource_username=$MEMSOURCE_USERNAME 
       -e memsource_password=$MEMSOURCE_PASSWORD 
