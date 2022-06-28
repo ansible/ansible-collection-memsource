@@ -8,47 +8,44 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 module: memsource_project_info
-short_description: Gather information about projects available in Memsource.
+short_description: Get the recent project from Memsource on passing the project name parameter.
 version_added: 0.0.1
 description:
-    - Gather information about projects available in Memsource
+    - Get the recent project from Memsource on passing the project name parameter
 author: 'Yanis Guenane (@Spredzy)'
 options:
-  filters:
+  project_name:
     description:
-      - A dict of filters to apply.
-      - Each dict item consists of a filter key and a filter value.
-      - See U(https://cloud.memsource.com/web/docs/api#operation/getProject) for possible filters.
-    required: false
-    default: {}
-    type: dict
+      - A string passed as the project name which matches the project name on Memsource
+    required: true
+    type: str
 extends_documentation_fragment:
-- community.memsource.memsource
+- ansible.memsource.memsource
 
 requirements: [memsource]
 """
 
 EXAMPLES = """
-- name: Gather information about all available projects
-  community.memsource.memsource_project_info:
+- name: Get Project by Project Name
+  ansible.memsource.memsource_project_info:
+    project_name: "{{ project_name }}"
+  register: _project
 
-- name: Gather information about a named project
-  community.memsource.memsource_project_info:
-    filters:
-      name: my-memsource-template
+- name: Set Project UID from project name {{ _project }}
+  set_fact: 
+    project_uid: "{{ _project.projects.content[0].uid }}"
 """
 
 RETURN = """
-projects:
+project:
     returned: on success
     description: >
-        Memsource templates that match the provided filters. Each element consists of a dict with all the information
-        related to that template.
-    type: list
+        Returns the json response for the specified project name
+    type: dict
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible_collections.community.memsource.plugins.module_utils.memsource import (
+from ansible_collections.ansible.memsource.plugins.module_utils.memsource import (
     get_default_argspec,
     get_memsource_client,
 )
@@ -56,15 +53,15 @@ from ansible_collections.community.memsource.plugins.module_utils.memsource impo
 
 def main():
     argument_spec = get_default_argspec()
-    argument_spec.update(dict(filters=dict(default={}, type="dict")))
+    argument_spec.update(dict(project_name=dict(type="str", required=True)))
 
     module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)
 
     _memsource = get_memsource_client(module.params)
 
-    projects = _memsource.get_projects(filters=module.params.get("filters"))
+    project = _memsource.get_project_by_name(module.params.get("project_name"))
 
-    module.exit_json(projects=projects)
+    module.exit_json(projects=project)
 
 
 if __name__ == "__main__":
