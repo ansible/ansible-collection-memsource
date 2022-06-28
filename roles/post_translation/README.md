@@ -53,7 +53,7 @@ Ansible Playbook (pull.yml) will be used to run this role.
     ansible-playbook playbooks/pull.yml 
       -e memsource_username=$MEMSOURCE_USERNAME 
       -e memsource_password=$MEMSOURCE_PASSWORD 
-      -e email=test@abc.com
+      -e email="test@abc.com"
       -e upstream_repo_url="test_repo/prod"
       -e repo_branch="devel"
       -e downstream_repo_url="test_repo/test"
