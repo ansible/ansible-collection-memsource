@@ -48,7 +48,7 @@ Execution Steps
 
 Ansible Playbook (pull.yml) will be used to run this role.
 
-1. Provide the required variables from command-line as per below example. 
+1. Provide the required variables from command-line as per below example
     ```
     ansible-playbook playbooks/pull.yml 
       -e memsource_username=$MEMSOURCE_USERNAME 
@@ -59,11 +59,8 @@ Ansible Playbook (pull.yml) will be used to run this role.
       -e downstream_repo_url="test_repo/test"
       -e project_name="MEMSOURCE TRANSLATION PROJECT V2.1"
     ```
-    
-    or
-    
-    Another way of providing vars using command-line can be using a separate yml file (e.g. extra_vars.yml, template is available on root path). 
-    
+    or \
+    Another way of providing vars using command-line can be using a separate yml file (e.g. extra_vars.yml, template is available on root path) \
     ```ansible-playbook playbooks/pull.yml -e @extra_vars.yml```
 
 2. A pull request will be generated in the upstream repository for merging the translated strings
