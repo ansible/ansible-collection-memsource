@@ -23,6 +23,7 @@ Below are mandatory variables required.
 - downstream_repo_url - (Type: str)
 - repo_branch - (Type: str)
 - project_name - (Type: str)
+- project_uid - (Optional) - (Type: int)
 
 Dependencies
 ------------
@@ -49,7 +50,15 @@ Ansible Playbook (pull.yml) will be used to run this role.
 
 1. Provide the required variables from command-line as per below or can be added to roles/post_translation/default/main.yml
     One way of providing vars using command-line can be as below example
-    ```ansible-playbook playbooks/pull.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD -e email=test@abc.com```
+    ```
+    ansible-playbook playbooks/pull.yml 
+      -e memsource_username=$MEMSOURCE_USERNAME 
+      -e memsource_password=$MEMSOURCE_PASSWORD 
+      -e email=test@abc.com
+      -e upstream_repo_url=test_repo/prod
+      -e downstream_repo_url=test_repo/test
+      -e project_name="MEMSOURCE TRANSLATION PROJECT V2.1"
+    ```
     or
     Another way of providing vars using command-line can be using a separate yml file (e.g. extra_vars.yml, template is available on root path)
     ```ansible-playbook playbooks/pull.yml -e @extra_vars.yml```
