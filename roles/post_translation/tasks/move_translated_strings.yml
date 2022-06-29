@@ -1,0 +1,50 @@
+---
+
+- name: Get current working directory
+  set_fact:
+    current_directory: "{{ lookup('env', 'PWD') }}"
+
+- name: Create temp directory to clone repo into
+  file:
+    state: directory
+    name: "{{ role_path }}/files/_clones/{{ component }}"
+  register: clone_directory
+
+- name: Clone the repository
+  git:
+    repo: 'git@github.com:{{ fork_repo_url }}.git'
+    dest: '{{clone_directory.path}}'
+    version: '{{ repo_branch }}'
+    force: true
+    depth: 1
+
+- name: Fetch Upstream for changes 
+  shell: cd {{ clone_directory.path }} && git pull --rebase git@github.com:{{ repo_url }}.git {{ repo_branch }}
+
+- name: Create unique branch name 
+  set_fact: 
+    pr_branch: translations_updated_{{ ansible_date_time.date }}_{{ ansible_date_time.hour }}_{{ ansible_date_time.minute }}_{{ ansible_date_time.second }}
+
+- name: Checkout to pr branch
+  shell: |
+    git config user.name {{ github_username }} && \
+    git checkout -b {{ pr_branch }}
+  register: checkout_branch
+  ignore_errors: true
+  args:
+    chdir: "{{ clone_directory.path }}"
+
+- name: Copy translations directory to _clones
+  shell: |
+    mv {{ role_path }}/files/_translations/{{ component }} {{ role_path }}/files/_clones/{{ component }}/translations
+  register: move_translations      
+
+- name: Pre_translation shell script
+  block:
+  - name: Permissions for Script
+    ansible.builtin.file:
+      path: "{{ role_path }}/files/_clones/{{ component }}/tools/scripts/l18n/post_translation.sh"
+      mode: '0755'
+
+  - name: Run Script
+    ansible.builtin.shell: "cd {{ role_path }}/files/ && ./_clones/{{ component }}/tools/scripts/l18n/post_translation.sh"

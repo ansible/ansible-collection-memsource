@@ -1,0 +1,26 @@
+---
+# tasks file for pre_translation
+
+- name: Assertions
+  assert:
+    that:
+      - memsource_username | default('') | length
+      - memsource_password | default('') | length
+      - translation_supported_langs | default('') | length
+      - repo_url | default('') | length
+      - repo_branch | default('') | length
+      - project_name | default('') | length
+      - project_template | type_debug == "int"   
+
+- name: Get current working directory
+  set_fact:
+    current_directory: "{{ lookup('env', 'PWD') }}"
+
+- name: Start with extracting strings from project
+  include_tasks: extract_strings.yml
+
+- name: Upload to Memsource 
+  include_tasks: upload_strings_to_memsource.yml
+
+- name: Cleanup 
+  include_tasks: "cleanup.yml"

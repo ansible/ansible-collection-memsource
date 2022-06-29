@@ -1,0 +1,9 @@
+---
+# defaults file for pre_translation
+preTranslate: true
+project_name: ""
+project_template: 
+repo_url: ""
+repo_branch: ""
+memsource_username: ""
+memsource_password: ""

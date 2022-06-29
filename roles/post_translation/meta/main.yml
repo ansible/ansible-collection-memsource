@@ -1,0 +1,13 @@
+galaxy_info:
+  author: Aditya Mulik
+  description: >
+    The post_translation role is used to pull translated strings from Memsource client for the respective 
+    translated languages and push the strings to the repository. Later a pull request is created 
+    by the script to the repository to be reviewed and merged.
+  company: Red Hat Inc.
+  license: license (GPL-2.0-or-later, MIT, etc)
+
+  min_ansible_version: 2.1
+  galaxy_tags: 
+    - post_translation
+    - pull
