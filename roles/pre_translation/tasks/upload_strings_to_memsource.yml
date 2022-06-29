@@ -1,0 +1,51 @@
+---
+
+- name: Project Creation block
+  block:
+  - name: Create Project from Template ID
+    ansible.memsource.memsource_project:
+      name: "{{ project_name }}"
+      template_id: "{{ project_template }}"
+    register: _project
+
+  - set_fact:
+      project_uid: "{{ _project.project.uid }}"
+  
+  - set_fact:
+      project_url: "https://cloud.memsource.com/web/project2/show/{{ project_uid }}"
+
+  - set_fact:
+      project_urls: "{{ project_urls | default([]) | combine(project_url) }}"
+
+- name: Job Creation Block
+  block:
+
+  - name: Set Language headers for each translation file
+    lineinfile:
+      path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+      state: absent
+      regexp: '^\"MIME-Version: '
+    loop: "{{ translation_files }}"
+
+  - name: Set Language headers for each translation file
+    lineinfile:
+      path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+      state: absent
+      regexp: '^\"Mime-Version: '
+    loop: "{{ translation_files }}"
+
+  - name: Set Language headers for each translation file
+    lineinfile:
+      path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+      state: absent
+      regexp: '^\"Plural-Forms: '
+    loop: "{{ translation_files }}"
+
+  - name: Upload files to jobs on project
+    ansible.memsource.memsource_job:
+      project_uid: "{{ project_uid }}"
+      langs: "{{ translation_supported_langs }}"
+      filename: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+      preTranslate: "{{ preTranslate }}"
+    loop: "{{ translation_files }}"
+    register: _job

@@ -1,26 +1,42 @@
 ---
-namespace: community
+namespace: ansible
+
 name: memsource
+
 version: 0.0.1
+
 readme: README.md
 
 authors:
   - Yanis Guenane <yguenane+opensource@gmail.com>
+  - Christian Adams <chadams@redhat.com>
+  - Aditya Mulik <aditya.mulik@gmail.com>
 
 description: An Ansible collection to interact with Memsource
 
 license:
   - Apache-2.0
-license_file: LICENSE
 
 tags:
   - memsource
   - translation
   - localization
 
-dependencies: {}
+repository: https://github.com/ansible/ansible-collection-memsource
 
-repository: https://github.com/ansible/ansible.memsource
-documentation: https://github.com/ansible/ansible.memsource
-homepage: https://github.com/ansible/ansible.memsource
-issues: https://github.com/ansible/ansible.memsource/issues
+documentation: https://github.com/ansible/ansible-collection-memsource
+
+homepage: https://github.com/ansible/ansible-collection-memsource
+
+issues: https://github.com/ansible/ansible-collection-memsource/issues
+
+build_ignore:
+- 'docs'
+- '.ci'
+- 'tests'
+- '.gitignore'
+- '.github'
+- '.git'
+- '.pytest_cache'
+- 'CONTRIBUTING.md'
+- 'Makefile'

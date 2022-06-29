@@ -1,0 +1,4 @@
+---
+- hosts: localhost
+  roles:
+    - post_translation

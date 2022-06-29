@@ -1,0 +1,5 @@
+---
+- name: Generic Localization - Pre-translation
+  hosts: localhost
+  roles:
+    - role: ansible.memsource.pre_translation

@@ -1,0 +1,5 @@
+---
+- name: Generic Localization - Post-translation
+  hosts: localhost
+  roles:
+    - role: ansible.memsource.post_translation
