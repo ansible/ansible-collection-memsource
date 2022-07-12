@@ -1,11 +1,12 @@
 ---
-# Github credentials
+memsource_username: "{{ lookup('env', 'MEMSOURCE_USERNAME') }}"
+memsource_password: "{{ lookup('env', 'MEMSOURCE_PASSWORD') }}"
+shell_script_path: "/tools/scripts/l18n/post_translation.sh"
+translation_supported_langs:
 github_username: ""
 github_token: ""
+repo_url: ""
+fork_repo_url: ""
+repo_branch: ""
 project_uid: ""
 project_name: ""
-repo_url: ""
-repo_branch: ""
-fork_repo_url: ""
-memsource_username: ""
-memsource_password: ""

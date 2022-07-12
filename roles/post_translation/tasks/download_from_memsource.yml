@@ -17,6 +17,8 @@
 - name: Get Project by Project Name
   ansible.memsource.memsource_project_info:
     project_name: "{{ project_name }}"
+    memsource_username: "{{ memsource_username }}"
+    memsource_password: "{{ memsource_password }}"
   register: _project
 
 - name: Set Project UID from project name
@@ -26,6 +28,8 @@
 - name: Gather information about a specific job
   ansible.memsource.memsource_job_info:
     project_uid: "{{ project_uid }}"
+    memsource_username: "{{ memsource_username }}"
+    memsource_password: "{{ memsource_password }}"
   register: _jobs
 
 - set_fact:
@@ -43,5 +47,7 @@
     project_uid: "{{ project_uid }}"
     path: "{{ role_path }}/files/_translations/{{ component }}/{{ item.targetLang }}/{{ item.filename | basename }}"
     force: true
+    memsource_username: "{{ memsource_username }}"
+    memsource_password: "{{ memsource_password }}"
   with_items: "{{ jobs }}"
   register: job_content

@@ -58,9 +58,11 @@ from ansible_collections.ansible.memsource.plugins.module_utils.memsource import
 
 def main():
     argument_spec = get_default_argspec()
-    argument_spec = dict(
-        filters=dict(default={}, type="dict"),
-        project_uid=dict(type="str", required=True),
+    argument_spec.update(
+        dict(
+            filters=dict(default={}, type="dict"),
+            project_uid=dict(type="str", required=True),
+        ),
     )
 
     module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)

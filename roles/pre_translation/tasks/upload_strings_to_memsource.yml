@@ -6,6 +6,8 @@
     ansible.memsource.memsource_project:
       name: "{{ project_name }}"
       template_id: "{{ project_template }}"
+      memsource_username: "{{ memsource_username }}"
+      memsource_password: "{{ memsource_password }}"  
     register: _project
 
   - set_fact:
@@ -47,5 +49,7 @@
       langs: "{{ translation_supported_langs }}"
       filename: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
       preTranslate: "{{ preTranslate }}"
+      memsource_username: "{{ memsource_username }}"
+      memsource_password: "{{ memsource_password }}"
     loop: "{{ translation_files }}"
     register: _job
