@@ -4,7 +4,7 @@
   shell: |
     git restore tools/scripts/l18n/post_translation.sh && \
     git add . && \
-    git commit -m "Pushing updated strings" && \
+    git commit -m "Pushing updated strings for localization" && \
     git push origin {{ pr_branch }}
   register: create_branch
   ignore_errors: true

@@ -1,9 +1,10 @@
 ---
-# defaults file for pre_translation
+memsource_username: "{{ lookup('env', 'MEMSOURCE_USERNAME') }}"
+memsource_password: "{{ lookup('env', 'MEMSOURCE_PASSWORD') }}"
+shell_script_path: "/tools/scripts/l18n/pre_translation.sh"
+translation_supported_langs:
 preTranslate: true
-project_name: ""
-project_template: 
 repo_url: ""
 repo_branch: ""
-memsource_username: ""
-memsource_password: ""
+project_name: ""
+project_template: 

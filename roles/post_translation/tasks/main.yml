@@ -5,7 +5,10 @@
   assert:
     that:
       - repo_url | default('') | length
+      - fork_repo_url | default('') | length
       - repo_branch | default('') | length
+      - github_username | default('') | length   
+      - project_name | default('') | length         
 
 - name: Get current working directory
   set_fact:

@@ -4,13 +4,10 @@
 - name: Assertions
   assert:
     that:
-      - memsource_username | default('') | length
-      - memsource_password | default('') | length
-      - translation_supported_langs | default('') | length
       - repo_url | default('') | length
       - repo_branch | default('') | length
       - project_name | default('') | length
-      - project_template | type_debug == "int"   
+      - project_template | type_debug == "int"
 
 - name: Get current working directory
   set_fact:

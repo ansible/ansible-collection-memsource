@@ -1,11 +1,13 @@
 ---
-
 # Template vars file
-
 github_username: ""
 github_token: ""
 repo_url: ""
 repo_branch: ""
 fork_repo_url: ""
+shell_script_path: ""
 project_name: ""
 project_template: 
+memsource_username: ""
+memsource_password: ""
+translation_supported_langs:
