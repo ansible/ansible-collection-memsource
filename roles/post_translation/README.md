@@ -19,7 +19,7 @@ Below are the mandatory variables required.
 - repo_url - (Type: str)
 - repo_branch - (Type: str)
 - fork_repo_url - (Type: str) (Please note, a fork of the main repository URL should already be present for the github_username specified)
-- translation_supported_langs - (Type: list)
+- languages - (Type: list)
 - shell_script_path (Default (/tools/scripts/l18n/post_translation.sh) - can be overridden) (Type: str)
 - project_name - (Type: str) (Optional: Either pass project_name or project_uid)
 - project_uid - (Type: int) (Optional) - (WARNING: Do not include in pre_translation role as it will
