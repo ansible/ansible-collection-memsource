@@ -14,7 +14,7 @@ Role Variables
 Below are the mandatory variables required.
 - memsource_username (Can be provided from the command-line, vars file or can be set in environment variables) - (Type: str)
 - memsource_password (Can be provided from the command-line, vars file or can be set in environment variables) - (Type: str)
-- translation_supported_langs - (Type: list)
+- languages - (Type: list)
 - shell_script_path (Default (/tools/scripts/l18n/pre_translation.sh) - can be overridden) (Type: str)
 - repo_url - (Type: str)
 - repo_branch - (Type: str)

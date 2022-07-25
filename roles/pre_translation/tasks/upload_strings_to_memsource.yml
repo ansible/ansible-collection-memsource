@@ -46,7 +46,7 @@
   - name: Upload files to jobs on project
     ansible.memsource.memsource_job:
       project_uid: "{{ project_uid }}"
-      langs: "{{ translation_supported_langs }}"
+      langs: "{{ languages }}"
       filename: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
       preTranslate: "{{ preTranslate }}"
       memsource_username: "{{ memsource_username }}"

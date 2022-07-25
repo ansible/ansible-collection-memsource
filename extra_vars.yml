@@ -10,4 +10,4 @@ project_name: ""
 project_template: 
 memsource_username: ""
 memsource_password: ""
-translation_supported_langs:
+languages:

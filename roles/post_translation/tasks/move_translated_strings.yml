@@ -34,10 +34,15 @@
   args:
     chdir: "{{ clone_directory.path }}"
 
-- name: Copy translations directory to _clones
+- name: Create translations directory
+  file:
+    path: "{{ clone_directory.path }}/translations"
+    state: directory
+
+- name: Loop over translation languages & copy translations directory to _clones
   shell: |
-    mv {{ role_path }}/files/_translations/{{ component }} {{ role_path }}/files/_clones/{{ component }}/translations
-  register: move_translations      
+    mv {{ role_path }}/files/_translations/{{ component }}/{{ item }} {{ role_path }}/files/_clones/{{ component }}/translations/
+  with_items: "{{ languages | default('*') }}"
 
 - name: Pre_translation shell script
   block:
