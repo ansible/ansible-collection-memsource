@@ -3,7 +3,7 @@ namespace: ansible
 
 name: memsource
 
-version: 0.0.1
+version: 1.0.1
 
 readme: README.md
 
