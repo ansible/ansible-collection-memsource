@@ -2,26 +2,22 @@
 # tasks file for post_translation
 
 - name: Assertions
-  assert:
+  ansible.builtin.assert:
     that:
       - repo_url | default('') | length
       - fork_repo_url | default('') | length
       - repo_branch | default('') | length
-      - github_username | default('') | length   
-      - project_name | default('') | length         
+      - github_username | default('') | length
+      - project_name | default('') | length
 
-- name: Get current working directory
-  set_fact:
-    current_directory: "{{ lookup('env', 'PWD') }}"
-
-- name: Download strings from Memsource 
+- name: Download strings from Memsource
   include_tasks: download_from_memsource.yml
 
-- name: Run post_translation shell script 
+- name: Run post_translation shell script
   include_tasks: move_translated_strings.yml
 
 - name: Upload to Repository
   include_tasks: push_strings.yml
 
-- name: Cleanup 
+- name: Cleanup
   include_tasks: "cleanup.yml"

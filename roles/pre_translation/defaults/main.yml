@@ -3,8 +3,8 @@ memsource_username: "{{ lookup('env', 'MEMSOURCE_USERNAME') }}"
 memsource_password: "{{ lookup('env', 'MEMSOURCE_PASSWORD') }}"
 shell_script_path: "/tools/scripts/l18n/pre_translation.sh"
 languages:
-preTranslate: true
+pre_translate: true
 repo_url: ""
 repo_branch: ""
 project_name: ""
-project_template: 
+project_template:

@@ -7,49 +7,52 @@
       name: "{{ project_name }}"
       template_id: "{{ project_template }}"
       memsource_username: "{{ memsource_username }}"
-      memsource_password: "{{ memsource_password }}"  
+      memsource_password: "{{ memsource_password }}"
     register: _project
 
-  - set_fact:
+  - name: Set the project_uid from the retrieved project
+    ansible.builtin.set_fact:
       project_uid: "{{ _project.project.uid }}"
-  
-  - set_fact:
+
+  - name: Set the project_url
+    ansible.builtin.set_fact:
       project_url: "https://cloud.memsource.com/web/project2/show/{{ project_uid }}"
 
-  - set_fact:
+  - name: Set the list of project_urls
+    ansible.builtin.set_fact:
       project_urls: "{{ project_urls | default([]) | combine(project_url) }}"
 
 - name: Job Creation Block
   block:
 
-  - name: Set Language headers for each translation file
-    lineinfile:
-      path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
-      state: absent
-      regexp: '^\"MIME-Version: '
-    loop: "{{ translation_files }}"
+    - name: Set Language headers for each translation file
+      ansible.builtin.lineinfile:
+        path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+        state: absent
+        regexp: '^\"MIME-Version: '
+      loop: "{{ translation_files }}"
 
-  - name: Set Language headers for each translation file
-    lineinfile:
-      path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
-      state: absent
-      regexp: '^\"Mime-Version: '
-    loop: "{{ translation_files }}"
+    - name: Set Language headers for each translation file
+      ansible.builtin.lineinfile:
+        path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+        state: absent
+        regexp: '^\"Mime-Version: '
+      loop: "{{ translation_files }}"
 
-  - name: Set Language headers for each translation file
-    lineinfile:
-      path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
-      state: absent
-      regexp: '^\"Plural-Forms: '
-    loop: "{{ translation_files }}"
+    - name: Set Language headers for each translation file
+      ansible.builtin.lineinfile:
+        path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+        state: absent
+        regexp: '^\"Plural-Forms: '
+      loop: "{{ translation_files }}"
 
-  - name: Upload files to jobs on project
-    ansible.memsource.memsource_job:
-      project_uid: "{{ project_uid }}"
-      langs: "{{ languages }}"
-      filename: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
-      preTranslate: "{{ preTranslate }}"
-      memsource_username: "{{ memsource_username }}"
-      memsource_password: "{{ memsource_password }}"
-    loop: "{{ translation_files }}"
-    register: _job
+    - name: Upload files to jobs on project
+      ansible.memsource.memsource_job:
+        project_uid: "{{ project_uid }}"
+        langs: "{{ languages }}"
+        filename: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+        preTranslate: "{{ pre_translate }}"
+        memsource_username: "{{ memsource_username }}"
+        memsource_password: "{{ memsource_password }}"
+      loop: "{{ translation_files }}"
+      register: _job

@@ -1,18 +1,19 @@
 ---
 
 - name: Get current working directory
-  set_fact:
+  ansible.builtin.set_fact:
     current_directory: "{{ lookup('env', 'PWD') }}"
 
 - name: Temporate Repository Storage Directory
   ansible.builtin.file:
     state: directory
     name: "{{ role_path }}/files/_translations/"
+    mode: 0775
   register: translations_dir
 
 - name: Set component name variable
-  set_fact:
-    component: '{{ repo_url.split("/")[1].replace(".git", "") }}'    
+  ansible.builtin.set_fact:
+    component: '{{ repo_url.split("/")[1].replace(".git", "") }}'
 
 - name: Get Project by Project Name
   ansible.memsource.memsource_project_info:
@@ -22,7 +23,7 @@
   register: _project
 
 - name: Set Project UID from project name
-  set_fact: 
+  ansible.builtin.set_fact:
     project_uid: "{{ _project.projects.content[0].uid }}"
 
 - name: Gather information about a specific job
@@ -32,13 +33,15 @@
     memsource_password: "{{ memsource_password }}"
   register: _jobs
 
-- set_fact:
+- name: Set the jobs retrieved as a list
+  ansible.builtin.set_fact:
     jobs: "{{ _jobs.jobs }}"
 
 - name: Create directory structure for all languages
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ role_path }}/files/_translations/{{ component }}/{{ item.targetLang }}/"
+    mode: 0775
   with_items: "{{ jobs }}"
 
 - name: Retrieve job information (download files)

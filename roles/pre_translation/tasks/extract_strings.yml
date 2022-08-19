@@ -1,23 +1,29 @@
 ---
 
+- name: Get current working directory
+  ansible.builtin.set_fact:
+    current_directory: "{{ lookup('env', 'PWD') }}"
+
 - name: Temporary Repository Storage Directory
   ansible.builtin.file:
     state: directory
     name: "{{ role_path }}/files/_clones/"
+    mode: 0775
   register: clone_dir
 
 - name: Set component name variable
-  set_fact:
+  ansible.builtin.set_fact:
     component: '{{ repo_url.split("/")[1].replace(".git", "") }}'
 
 - name: Set clone_repo path
   ansible.builtin.file:
     state: directory
     name: "{{ role_path }}/files/_clones/{{ component }}"
-  register: clone_repo_path  
+    mode: 0775
+  register: clone_repo_path
 
 - name: Cloned Repository Directory (From Repository - latest changes)
-  git:
+  ansible.builtin.git:
     repo: 'git@github.com:{{ repo_url }}.git'
     dest: '{{ clone_repo_path.path }}'
     version: '{{ repo_branch }}'
@@ -28,24 +34,25 @@
   ansible.builtin.file:
     state: directory
     path: "{{ role_path }}/files/_clones/{{ component }}/translations"
+    mode: 0775
   register: translations_dir
 
 - name: Pre_translation shell script
   block:
-  - name: Permissions for Script
-    ansible.builtin.file:
-      path: "{{ role_path }}/files/_clones/{{ component }}/{{ shell_script_path }}"
-      mode: '0755'
+    - name: Permissions for Script
+      ansible.builtin.file:
+        path: "{{ role_path }}/files/_clones/{{ component }}/{{ shell_script_path }}"
+        mode: '0755'
 
-  - name: Run Script
-    ansible.builtin.shell:
-      cmd: ./{{ shell_script_path }}
-      chdir: "{{ role_path }}/files/_clones/{{ component }}"
+    - name: Run Script
+      ansible.builtin.shell: cd {{ role_path }}/files/_clones/{{ component }} && ./{{ shell_script_path }}
+      changed_when: false
 
 - name: List all files in translations_dir
-  command: "ls {{ translations_dir.path }}"
+  ansible.builtin.command: "ls {{ translations_dir.path }}"
   register: translations_loop
+  changed_when: false
 
-- name: Translations Files in List 
-  set_fact: 
-    translation_files: "{{ translations_loop.stdout_lines }}"  
+- name: Translations Files in List
+  ansible.builtin.set_fact:
+    translation_files: "{{ translations_loop.stdout_lines }}"

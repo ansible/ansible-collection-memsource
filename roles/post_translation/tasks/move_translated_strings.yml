@@ -1,57 +1,55 @@
 ---
 
 - name: Get current working directory
-  set_fact:
+  ansible.builtin.set_fact:
     current_directory: "{{ lookup('env', 'PWD') }}"
 
 - name: Create temp directory to clone repo into
-  file:
+  ansible.builtin.file:
     state: directory
     name: "{{ role_path }}/files/_clones/{{ component }}"
+    mode: 0775
   register: clone_directory
 
 - name: Clone the repository
-  git:
+  ansible.builtin.git:
     repo: 'git@github.com:{{ fork_repo_url }}.git'
-    dest: '{{clone_directory.path}}'
+    dest: '{{ clone_directory.path }}'
     version: '{{ repo_branch }}'
     force: true
     depth: 1
 
-- name: Fetch Upstream for changes 
-  shell: cd {{ clone_directory.path }} && git pull --rebase git@github.com:{{ repo_url }}.git {{ repo_branch }}
+- name: Fetch Upstream for changes
+  ansible.builtin.shell: cd {{ clone_directory.path }} && git pull --rebase git@github.com:{{ repo_url }}.git {{ repo_branch }}
+  changed_when: false
 
-- name: Create unique branch name 
-  set_fact: 
+- name: Create unique branch name
+  ansible.builtin.set_fact:
     pr_branch: translations_updated_{{ ansible_date_time.date }}_{{ ansible_date_time.hour }}_{{ ansible_date_time.minute }}_{{ ansible_date_time.second }}
 
 - name: Checkout to pr branch
-  shell: |
-    git config user.name {{ github_username }} && \
-    git checkout -b {{ pr_branch }}
-  register: checkout_branch
-  ignore_errors: true
-  args:
-    chdir: "{{ clone_directory.path }}"
+  ansible.builtin.shell: cd {{ clone_directory.path }} && git checkout -b {{ pr_branch }}
+  changed_when: false
 
 - name: Create translations directory
-  file:
+  ansible.builtin.file:
     path: "{{ clone_directory.path }}/translations"
     state: directory
+    mode: 0775
 
 - name: Loop over translation languages & copy translations directory to _clones
-  shell: |
+  ansible.builtin.shell: |
     mv {{ role_path }}/files/_translations/{{ component }}/{{ item }} {{ role_path }}/files/_clones/{{ component }}/translations/
   with_items: "{{ languages | default('*') }}"
+  changed_when: false
 
 - name: Pre_translation shell script
   block:
-  - name: Permissions for Script
-    ansible.builtin.file:
-      path: "{{ role_path }}/files/_clones/{{ component }}/{{ shell_script_path }}"
-      mode: '0755'
+    - name: Permissions for Script
+      ansible.builtin.file:
+        path: "{{ role_path }}/files/_clones/{{ component }}/{{ shell_script_path }}"
+        mode: '0755'
 
-  - name: Run Script
-    ansible.builtin.shell:
-      cmd: ./{{ shell_script_path }}
-      chdir: "{{ role_path }}/files/_clones/{{ component }}"
+    - name: Run Script
+      ansible.builtin.shell: cd {{ role_path }}/files/_clones/{{ component }} && ./{{ shell_script_path }}
+      changed_when: false

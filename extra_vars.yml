@@ -7,7 +7,7 @@ repo_branch: ""
 fork_repo_url: ""
 shell_script_path: ""
 project_name: ""
-project_template: 
+project_template:
 memsource_username: ""
 memsource_password: ""
 languages:
