@@ -31,12 +31,12 @@ homepage: https://github.com/ansible/ansible-collection-memsource
 issues: https://github.com/ansible/ansible-collection-memsource/issues
 
 build_ignore:
-- 'docs'
-- '.ci'
-- 'tests'
-- '.gitignore'
-- '.github'
-- '.git'
-- '.pytest_cache'
-- 'CONTRIBUTING.md'
-- 'Makefile'
+  - 'docs'
+  - '.ci'
+  - 'tests'
+  - '.gitignore'
+  - '.github'
+  - '.git'
+  - '.pytest_cache'
+  - 'CONTRIBUTING.md'
+  - 'Makefile'

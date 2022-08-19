@@ -20,7 +20,7 @@ Below are the mandatory variables required.
 - repo_branch - (Type: str)
 - project_name - (Type: str)
 - project_template (Required: Project template dedicated to the specfic project to be translated) - (Type: int)
-- preTranslate (Optional: Certain translations will be pre_translated from cached memsource database, until stated false) - (Type: bool)
+- pre_translate (Default: true | Optional: Certain translations will be pre_translated from cached memsource database, until stated false) - (Type: bool)
 
 Dependencies
 ------------
