@@ -10,10 +10,10 @@
       - project_template | type_debug == "int"
 
 - name: Start with extracting strings from project
-  include_tasks: extract_strings.yml
+  ansible.builtin.include_tasks: extract_strings.yml
 
 - name: Upload to Memsource
-  include_tasks: upload_strings_to_memsource.yml
+  ansible.builtin.include_tasks: upload_strings_to_memsource.yml
 
 - name: Cleanup
-  include_tasks: "cleanup.yml"
+  ansible.builtin.include_tasks: "cleanup.yml"

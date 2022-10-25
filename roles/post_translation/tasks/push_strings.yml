@@ -13,8 +13,8 @@
   ansible.builtin.shell: |
     gh pr create --head {{ github_username }}:{{ pr_branch }} --fill --base {{ repo_branch }} --repo {{ repo_url }}
   environment:
-    GITHUB_USERNAME: '{{ github_username }}' # Default credentials will be retrieved from GitHub SSH Key
-    GITHUB_TOKEN: '{{ github_token }}' # Default credentials will be retrieved from GitHub SSH Key
+    GITHUB_USERNAME: '{{ github_username }}'  # Default credentials will be retrieved from GitHub SSH Key
+    GITHUB_TOKEN: '{{ github_token }}'  # Default credentials will be retrieved from GitHub SSH Key
   changed_when: false
   args:
     chdir: '{{ clone_directory.path }}'
