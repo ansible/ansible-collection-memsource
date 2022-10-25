@@ -63,7 +63,7 @@ Execution Steps
 An Ansible Playbook (pull.yml) will be used to run this role.
 
 1. Provide the required variables from the command-line as per the below example \
-    ```ansible-playbook playbooks/pull.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD -e repo_url="test_repo/prod" -e repo_branch="devel" -e repo_url="test_repo/test" -e project_name="MEMSOURCE TRANSLATION PROJECT V2.1"``` \
+    ```ansible-playbook playbooks/pull.yml -e memsource_username=$MEMSOURCE_USERNAME -e memsource_password=$MEMSOURCE_PASSWORD -e repo_url="test_repo/prod" -e repo_branch="devel" -e project_name="MEMSOURCE TRANSLATION PROJECT V2.1"``` \
     or \
     Another way of providing vars using the command-line can be using a separate yml file (e.g. extra_vars.yml, template is available on the root path) \
     ```ansible-playbook playbooks/pull.yml -e @extra_vars.yml```
