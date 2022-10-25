@@ -25,7 +25,8 @@
 - name: Set Project UID from project name
   ansible.builtin.set_fact:
     project_uid: "{{ _project.projects.content[0].uid }}"
-  when: project_uid is not defined
+  when:
+    - project_uid is not defined or not project_uid | length
 
 - name: Gather information about a specific job
   ansible.memsource.memsource_job_info:
