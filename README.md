@@ -53,7 +53,7 @@ The python module dependencies are not installed by `ansible-galaxy`.  They can
 be manually installed using pip:
 
 ```sh
-#> pip install requirements.txt
+#> pip install -r requirements.txt
 ```
 
 or:
