@@ -20,15 +20,19 @@
     state: directory
     name: "{{ role_path }}/files/_clones/{{ component }}"
     mode: 0775
-  register: clone_repo_path
+  register: clone_directory
 
-- name: Cloned Repository Directory (From Repository - latest changes)
+- name: Clone the repository
   ansible.builtin.git:
-    repo: 'git@github.com:{{ repo_url }}.git'
-    dest: '{{ clone_repo_path.path }}'
+    repo: 'git@github.com:{{ fork_repo_url }}.git'
+    dest: '{{ clone_directory.path }}'
     version: '{{ repo_branch }}'
     force: true
     depth: 1
+
+- name: Fetch Upstream for changes
+  ansible.builtin.shell: cd {{ clone_directory.path }} && git pull --rebase git@github.com:{{ repo_url }}.git {{ repo_branch }}
+  changed_when: false
 
 - name: Temporary Strings Storage Directory in repository
   ansible.builtin.file:
