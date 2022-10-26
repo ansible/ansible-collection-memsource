@@ -29,7 +29,7 @@ Global vars are declared in the defaults folder as main.yml which can be overrid
 
 Steps to create pre_translation shell Script
 --------------------------------------------
-- Create a pre_translation.sh file. This file will reside in the project which will be used for translation in the root path as per below
+- Create a pre_translation.sh file. This file will reside in the project (**forked repository**) which will be used for translation in the root path as per below
 **/tools/scripts/l18n/pre_translation.sh**
 Note: File can be stored in other directories as well, you need to specify the path in the var shell_script_path to override the default path for the shell script (Reference the var in the default/main.yml file)
 - Add the execution commands to extract the files (e.g. po, json)

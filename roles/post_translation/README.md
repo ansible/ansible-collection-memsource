@@ -34,7 +34,7 @@ Dependencies
 
 Steps to create post_translation shell Script
 --------------------------------------------
-- Create a post_translation.sh file. This file will reside in the project which will be used for translation in the root path as per below e.g.
+- Create a post_translation.sh file. This file will reside in the project (**forked repository**) which will be used for translation in the root path as per below e.g.
 **/tools/scripts/l18n/post_translation.sh**
 Note: The file can be stored in other directories as well, you need to specify the path in the var shell_script_path to override the default path for the shell script (Reference the var in the default/main.yml file)
 - A translations folder will be provided with all the translated strings retrieved from Memsource (folder name: translations)\
