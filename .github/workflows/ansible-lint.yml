@@ -1,19 +1,48 @@
-name: Ansible Lint
+---
+name: Lint
 on:
-  push:
   pull_request:
     branches:
       - main
-      - feature_lint
 
 jobs:
-  build:
+  ansible-lint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout sources
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          architecture: x64
+
+      - name: Install ansible-lint
+        run: pip install ansible-lint
+
+      - name: Install ansible collections
+        run: ansible-galaxy collection install .
+
       - name: Run ansible-lint
-        uses: ansible-community/ansible-lint-action@main
+        run: ansible-lint
+
+  super-lint:
+    name: Lint code base
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_PYTHON_FLAKE8: false
+          VALIDATE_PYTHON_PYLINT: false
+          VALIDATE_NATURAL_LANGUAGE: false

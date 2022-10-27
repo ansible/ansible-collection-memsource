@@ -6,6 +6,14 @@ exclude_paths:
   - roles/post_translation/files/_clones
 
 warn_list:
+  - yaml
+
+skip_list:
   - command-instead-of-shell
+  - command-instead-of-module
 
 use_default_rules: true
+
+tags:
+  - core
+  - jinja

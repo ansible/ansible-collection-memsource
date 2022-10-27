@@ -64,7 +64,6 @@
       ansible.builtin.shell: "source {{ shell_script_path }}"
       args:
         chdir: "{{ role_path }}/files/_clones/{{ component }}"
-      changed_when: false
 
 - name: List all files in translations_dir
   ansible.builtin.command: "ls {{ translations_dir.path }}"

@@ -26,9 +26,13 @@
     chdir: "{{ clone_directory.path }}"
   changed_when: false
 
+- name: Set _time variable
+  ansible.builtin.set_fact:
+    _time: "{{ ansible_date_time.hour }}_{{ ansible_date_time.minute }}_{{ ansible_date_time.second }}"
+
 - name: Create unique branch name
   ansible.builtin.set_fact:
-    pr_branch: translations_updated_{{ ansible_date_time.date }}_{{ ansible_date_time.hour }}_{{ ansible_date_time.minute }}_{{ ansible_date_time.second }}
+    pr_branch: "translations_updated_{{ ansible_date_time.date }}_{{ _time }}"
 
 - name: Checkout to pr branch
   ansible.builtin.shell: git checkout -b {{ pr_branch }}
@@ -44,14 +48,16 @@
 
 - name: Loop over translation languages & copy translations directory to _clones
   ansible.builtin.shell: |
-    mv {{ role_path }}/files/_translations/{{ component }}/{{ item }} {{ clone_directory.path }}/translations/
+    mv \
+    {{ role_path }}/files/_translations/{{ component }}/{{ item }} \
+    {{ clone_directory.path }}/translations/
   with_items: "{{ languages | default('*') }}"
   changed_when: false
 
 - name: If Custom script is provided, copy it into the clone and execute it
-  block:
   when:
     - local_shell_script_path is defined
+  block:
     - name: Create tools/scripts/l18n directory if needed
       ansible.builtin.file:
         path: "{{ clone_directory.path }}/tools/scripts/l18n"
