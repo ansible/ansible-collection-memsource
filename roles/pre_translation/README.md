@@ -15,12 +15,18 @@ Below are the mandatory variables required.
 - memsource_username (Can be provided from the command-line, vars file or can be set in environment variables) - (Type: str)
 - memsource_password (Can be provided from the command-line, vars file or can be set in environment variables) - (Type: str)
 - languages - (Type: list)
-- shell_script_path (Default (/tools/scripts/l18n/pre_translation.sh) - can be overridden) (Type: str)
+- shell_script_path (Default (tools/scripts/l18n/pre_translation.sh) - can be overridden) (Type: str)
 - repo_url - (Type: str)
 - repo_branch - (Type: str)
 - project_name - (Type: str)
-- project_template (Required: Project template dedicated to the specfic project to be translated) - (Type: int)
+- project_template (Required: Project template dedicated to the specific project to be translated) - (Type: int)
 - pre_translate (Default: true | Optional: Certain translations will be pre_translated from cached memsource database, until stated false) - (Type: bool)
+
+Optional parameters
+- local_shell_script_path - (Type: str) (Example: "/path/to/script/pinakes_post_translation.sh")
+
+Specifying a `local_shell_script_path` will copy the script at the path provided into the clone at `tools/scripts/l18n/pre_translation.sh` and run it as part of the post_translation role. This provides an alternative to vendoring the script in the application's repo.
+
 
 Dependencies
 ------------
@@ -30,7 +36,7 @@ Global vars are declared in the defaults folder as main.yml which can be overrid
 Steps to create pre_translation shell Script
 --------------------------------------------
 - Create a pre_translation.sh file. This file will reside in the project which will be used for translation in the root path as per below
-**/tools/scripts/l18n/pre_translation.sh**
+**tools/scripts/l18n/pre_translation.sh**
 Note: File can be stored in other directories as well, you need to specify the path in the var shell_script_path to override the default path for the shell script (Reference the var in the default/main.yml file)
 - Add the execution commands to extract the files (e.g. po, json)
 - Once the file(s) are generated, move the files to a folder (folder name: translations)

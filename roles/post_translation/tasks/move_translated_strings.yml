@@ -13,14 +13,17 @@
 
 - name: Clone the repository
   ansible.builtin.git:
-    repo: 'git@github.com:{{ fork_repo_url }}.git'
-    dest: '{{ clone_directory.path }}'
+    repo: "git@github.com:{{ fork_repo_url }}.git"
+    dest: "{{ clone_directory.path }}"
     version: '{{ repo_branch }}'
     force: true
     depth: 1
 
 - name: Fetch Upstream for changes
-  ansible.builtin.shell: cd {{ clone_directory.path }} && git pull --rebase git@github.com:{{ repo_url }}.git {{ repo_branch }}
+  ansible.builtin.shell:
+    cmd: git pull --rebase git@github.com:{{ repo_url }}.git {{ repo_branch }}
+  args:
+    chdir: "{{ clone_directory.path }}"
   changed_when: false
 
 - name: Create unique branch name
@@ -28,7 +31,9 @@
     pr_branch: translations_updated_{{ ansible_date_time.date }}_{{ ansible_date_time.hour }}_{{ ansible_date_time.minute }}_{{ ansible_date_time.second }}
 
 - name: Checkout to pr branch
-  ansible.builtin.shell: cd {{ clone_directory.path }} && git checkout -b {{ pr_branch }}
+  ansible.builtin.shell: git checkout -b {{ pr_branch }}
+  args:
+    chdir: "{{ clone_directory.path }}"
   changed_when: false
 
 - name: Create translations directory
@@ -39,17 +44,35 @@
 
 - name: Loop over translation languages & copy translations directory to _clones
   ansible.builtin.shell: |
-    mv {{ role_path }}/files/_translations/{{ component }}/{{ item }} {{ role_path }}/files/_clones/{{ component }}/translations/
+    mv {{ role_path }}/files/_translations/{{ component }}/{{ item }} {{ clone_directory.path }}/translations/
   with_items: "{{ languages | default('*') }}"
   changed_when: false
 
-- name: Pre_translation shell script
+- name: If Custom script is provided, copy it into the clone and execute it
+  block:
+  when:
+    - local_shell_script_path is defined
+    - name: Create tools/scripts/l18n directory if needed
+      ansible.builtin.file:
+        path: "{{ clone_directory.path }}/tools/scripts/l18n"
+        state: directory
+        mode: 0775
+
+    - name: Copy Script into clone
+      ansible.builtin.copy:
+        src: "{{ local_shell_script_path }}"
+        dest: "{{ clone_directory.path }}/{{ shell_script_path }}"
+        mode: 0755
+
+- name: Post_translation shell script
   block:
     - name: Permissions for Script
       ansible.builtin.file:
-        path: "{{ role_path }}/files/_clones/{{ component }}/{{ shell_script_path }}"
-        mode: '0755'
+        path: "{{ clone_directory.path }}/{{ shell_script_path }}"
+        mode: 0755
 
     - name: Run Script
-      ansible.builtin.shell: cd {{ role_path }}/files/_clones/{{ component }} && ./{{ shell_script_path }}
+      ansible.builtin.shell: "source {{ shell_script_path }}"
+      args:
+        chdir: "{{ role_path }}/files/_clones/{{ component }}"
       changed_when: false

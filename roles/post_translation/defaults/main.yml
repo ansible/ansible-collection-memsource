@@ -1,7 +1,7 @@
 ---
 memsource_username: "{{ lookup('env', 'MEMSOURCE_USERNAME') }}"
 memsource_password: "{{ lookup('env', 'MEMSOURCE_PASSWORD') }}"
-shell_script_path: "/tools/scripts/l18n/post_translation.sh"
+shell_script_path: "tools/scripts/l18n/post_translation.sh"
 languages:
 github_username: ""
 github_token: ""

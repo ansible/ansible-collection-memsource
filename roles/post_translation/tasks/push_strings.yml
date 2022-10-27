@@ -3,7 +3,7 @@
 - name: Add files to pr_branch & push the files
   ansible.builtin.shell: |
     cd {{ clone_directory.path }} &&\
-    git restore tools/scripts/l18n/post_translation.sh && \
+    git restore {{ shell_script_path }} && \
     git add . && \
     git commit -m "Pushing updated strings for localization" && \
     git push origin {{ pr_branch }}

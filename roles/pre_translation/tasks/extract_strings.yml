@@ -20,12 +20,12 @@
     state: directory
     name: "{{ role_path }}/files/_clones/{{ component }}"
     mode: 0775
-  register: clone_repo_path
+  register: clone_directory
 
 - name: Cloned Repository Directory (From Repository - latest changes)
   ansible.builtin.git:
     repo: 'git@github.com:{{ repo_url }}.git'
-    dest: '{{ clone_repo_path.path }}'
+    dest: '{{ clone_directory.path }}'
     version: '{{ repo_branch }}'
     force: true
     depth: 1
@@ -33,19 +33,37 @@
 - name: Temporary Strings Storage Directory in repository
   ansible.builtin.file:
     state: directory
-    path: "{{ role_path }}/files/_clones/{{ component }}/translations"
+    path: "{{ clone_directory.path }}/translations"
     mode: 0775
   register: translations_dir
+
+- name: If Custom script is provided, copy it into the clone and execute it (assumes local script, not part of clone)
+  when:
+    - local_shell_script_path is defined
+  block:
+    - name: Create tools/scripts/l18n directory if needed
+      ansible.builtin.file:
+        path: "{{ clone_directory.path }}/tools/scripts/l18n"
+        state: directory
+        mode: 0775
+
+    - name: Copy Script into clone
+      ansible.builtin.copy:
+        src: "{{ local_shell_script_path }}"
+        dest: "{{ clone_directory.path }}/{{ shell_script_path }}"
+        mode: 0755
 
 - name: Pre_translation shell script
   block:
     - name: Permissions for Script
       ansible.builtin.file:
-        path: "{{ role_path }}/files/_clones/{{ component }}/{{ shell_script_path }}"
-        mode: '0755'
+        path: "{{ clone_directory.path }}/{{ shell_script_path }}"
+        mode: 0755
 
     - name: Run Script
-      ansible.builtin.shell: cd {{ role_path }}/files/_clones/{{ component }} && ./{{ shell_script_path }}
+      ansible.builtin.shell: "source {{ shell_script_path }}"
+      args:
+        chdir: "{{ role_path }}/files/_clones/{{ component }}"
       changed_when: false
 
 - name: List all files in translations_dir
