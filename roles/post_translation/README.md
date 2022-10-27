@@ -20,11 +20,16 @@ Below are the mandatory variables required.
 - repo_branch - (Type: str)
 - fork_repo_url - (Type: str) (Please note, a fork of the main repository URL should already be present for the github_username specified)
 - languages - (Type: list)
-- shell_script_path (Default (/tools/scripts/l18n/post_translation.sh) - can be overridden) (Type: str)
+- shell_script_path (Default (tools/scripts/l18n/post_translation.sh) - can be overridden) (Type: str)
 - project_name - (Type: str) (Optional: Either pass project_name or project_uid)
 - project_uid - (Type: int) (Optional) - (WARNING: Do not include in pre_translation role as it will
 fail)
 - github_token - (Type: str) (Optional: GitHub Authentication can be done using SSH)
+
+Optional parameters
+- local_shell_script_path - (Type: str) (Example: "/path/to/script/pinakes_post_translation.sh")
+
+Specifying a `local_shell_script_path` will copy the script at the path provided into the clone at `tools/scripts/l18n/post_translation.sh` and run it as part of the post_translation role. This provides an alternative to vendoring the script in the application's repo.
 
 Dependencies
 ------------
@@ -35,7 +40,7 @@ Dependencies
 Steps to create post_translation shell Script
 --------------------------------------------
 - Create a post_translation.sh file. This file will reside in the project which will be used for translation in the root path as per below e.g.
-**/tools/scripts/l18n/post_translation.sh**
+**tools/scripts/l18n/post_translation.sh**
 Note: The file can be stored in other directories as well, you need to specify the path in the var shell_script_path to override the default path for the shell script (Reference the var in the default/main.yml file)
 - A translations folder will be provided with all the translated strings retrieved from Memsource (folder name: translations)\
   Translation folder with all language generated files will be in below format\

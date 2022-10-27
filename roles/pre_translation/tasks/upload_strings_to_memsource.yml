@@ -27,21 +27,21 @@
 
     - name: Set Language headers for each translation file
       ansible.builtin.lineinfile:
-        path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+        path: "{{ clone_directory.path }}/translations/{{ item }}"
         state: absent
         regexp: '^\"MIME-Version: '
       loop: "{{ translation_files }}"
 
     - name: Set Language headers for each translation file
       ansible.builtin.lineinfile:
-        path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+        path: "{{ clone_directory.path }}/translations/{{ item }}"
         state: absent
         regexp: '^\"Mime-Version: '
       loop: "{{ translation_files }}"
 
     - name: Set Language headers for each translation file
       ansible.builtin.lineinfile:
-        path: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+        path: "{{ clone_directory.path }}/translations/{{ item }}"
         state: absent
         regexp: '^\"Plural-Forms: '
       loop: "{{ translation_files }}"
@@ -50,7 +50,7 @@
       ansible.memsource.memsource_job:
         project_uid: "{{ project_uid }}"
         langs: "{{ languages }}"
-        filename: "{{ role_path }}/files/_clones/{{ component }}/translations/{{ item }}"
+        filename: "{{ clone_directory.path }}/translations/{{ item }}"
         preTranslate: "{{ pre_translate }}"
         memsource_username: "{{ memsource_username }}"
         memsource_password: "{{ memsource_password }}"
