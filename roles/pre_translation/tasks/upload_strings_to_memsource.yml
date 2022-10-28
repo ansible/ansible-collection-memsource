@@ -5,7 +5,7 @@
   - name: Create Project from Template ID
     ansible.memsource.memsource_project:
       name: "{{ project_name }}"
-      template_id: "{{ project_template }}"
+      template_id: "{{ project_template | int }}"
       memsource_username: "{{ memsource_username }}"
       memsource_password: "{{ memsource_password }}"
     register: _project
