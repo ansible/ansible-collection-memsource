@@ -56,3 +56,7 @@
         memsource_password: "{{ memsource_password }}"
       loop: "{{ translation_files }}"
       register: _job
+
+- name: Print Project URL
+  ansible.builtin.debug:
+    msg: "{{ project_urls }}"
