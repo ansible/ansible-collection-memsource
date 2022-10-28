@@ -7,7 +7,7 @@
       - repo_url | default('') | length
       - repo_branch | default('') | length
       - project_name | default('') | length
-      - project_template | type_debug == "int"
+      - project_template | default('') | length
 
 - name: Start with extracting strings from project
   ansible.builtin.include_tasks: extract_strings.yml
