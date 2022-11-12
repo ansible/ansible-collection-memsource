@@ -12,6 +12,7 @@ languages:
 
 # Uncomment and update string to override defaults
 # shell_script_path: ""
+# local_shell_script_path: "/custom/local/script.sh"
 # commit_message: ""
 # github_token: ""
-# project_uid
+# project_uid: ""
