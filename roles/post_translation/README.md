@@ -12,15 +12,16 @@ Requirements
 Role Variables
 --------------
 
-Below are the mandatory variables required.
+Below are the variables required for the role. (Default variables can be overridden)
 - memsource_username (Can be provided from the command-line, vars file or can be set in environment variables) - (Type: str)
 - memsource_password (Can be provided from the command-line, vars file or can be set in environment variables) - (Type: str)
 - github_username - (Type: str)
-- repo_url - (Type: str)
+- repo_url - (Type: str) (e.g. ansible/pinakes-ui)
 - repo_branch - (Type: str)
 - fork_repo_url - (Type: str) (Please note, a fork of the main repository URL should already be present for the github_username specified)
 - languages - (Type: list)
-- shell_script_path (Default (tools/scripts/l18n/post_translation.sh) - can be overridden) (Type: str)
+- shell_script_path (Default: tools/scripts/l18n/post_translation.sh) (Type: str)
+- commit_message (Default: Pushing updated strings for localization)
 - project_name - (Type: str) (Optional: Either pass project_name or project_uid)
 - project_uid - (Type: int) (Optional) - (WARNING: Do not include in pre_translation role as it will
 fail)
