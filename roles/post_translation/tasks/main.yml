@@ -9,6 +9,7 @@
       - repo_branch | default('') | length
       - github_username | default('') | length
       - project_name | default('') | length
+      - commit_message | default('') | length
 
 - name: Download strings from Memsource
   ansible.builtin.include_tasks: download_from_memsource.yml

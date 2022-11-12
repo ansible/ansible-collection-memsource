@@ -60,7 +60,7 @@
   block:
     - name: Create tools/scripts/l18n directory if needed
       ansible.builtin.file:
-        path: "{{ clone_directory.path }}/tools/scripts/l18n"
+        path: "{{ clone_directory.path }}/{{ shell_script_path | dirname }}"
         state: directory
         mode: 0775
 
