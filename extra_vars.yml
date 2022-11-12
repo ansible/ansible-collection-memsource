@@ -1,13 +1,17 @@
 ---
 # Template vars file
 github_username: ""
-github_token: ""
 repo_url: ""
 repo_branch: ""
 fork_repo_url: ""
-shell_script_path: ""
 project_name: ""
-project_template:
+project_template: ""
 memsource_username: ""
 memsource_password: ""
 languages:
+
+# Uncomment and update string to override defaults
+# shell_script_path: ""
+# commit_message: ""
+# github_token: ""
+# project_uid

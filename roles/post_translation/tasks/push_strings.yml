@@ -6,7 +6,7 @@
     git add . && \
     git reset -- {{ shell_script_path }} && \
     git reset -- tools && \
-    git commit -m "Pushing updated strings for localization" && \
+    git commit -m "{{ commit_message }}" && \
     git push origin {{ pr_branch }}
   changed_when: false
 

@@ -11,15 +11,15 @@ A shell script in the repository to move the translated strings and it's path to
 Role Variables
 --------------
 
-Below are the mandatory variables required.
+Below are the variables required for the role. (Default variables can be overridden)
 - memsource_username (Can be provided from the command-line, vars file or can be set in environment variables) - (Type: str)
 - memsource_password (Can be provided from the command-line, vars file or can be set in environment variables) - (Type: str)
 - languages - (Type: list)
 - shell_script_path (Default (tools/scripts/l18n/pre_translation.sh) - can be overridden) (Type: str)
-- repo_url - (Type: str)
+- repo_url - (Type: str) (e.g. ansible/pinakes-ui)
 - repo_branch - (Type: str)
 - project_name - (Type: str)
-- project_template (Required: Project template dedicated to the specific project to be translated) - (Type: int)
+- project_template (Required: Project template dedicated to the specific project to be translated) - (Type: str)
 - pre_translate (Default: true | Optional: Certain translations will be pre_translated from cached memsource database, until stated false) - (Type: bool)
 
 Optional parameters

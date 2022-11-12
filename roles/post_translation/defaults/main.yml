@@ -2,6 +2,7 @@
 memsource_username: "{{ lookup('env', 'MEMSOURCE_USERNAME') }}"
 memsource_password: "{{ lookup('env', 'MEMSOURCE_PASSWORD') }}"
 shell_script_path: "tools/scripts/l18n/post_translation.sh"
+commit_message: "Pushing updated strings for localization"
 languages:
 github_username: ""
 github_token: ""
