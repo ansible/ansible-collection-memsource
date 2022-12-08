@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GitHub Linter](https://github.com/ansible/ansible-collection-memsource/workflows/Linter/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-This collection aims to offer an Ansible native experience in order to interact and automate workflows with [Memsouce](https://www.memsource.com/). - "Helping global companies translate efficiently"
+This collection aims to offer an Ansible native experience in order to interact and automate workflows with [Memsource](https://www.memsource.com/). - "Helping global companies translate efficiently"
 
 ## Included content
 
